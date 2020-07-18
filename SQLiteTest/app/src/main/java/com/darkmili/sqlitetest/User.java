@@ -3,19 +3,11 @@ package com.darkmili.sqlitetest;
 
 import org.litepal.crud.LitePalSupport;
 
-public class user extends LitePalSupport {
-    private Integer id;
+public class User extends LitePalSupport {
+
     private String name;
-    private String author;
-    private float price;
+    private String password;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -25,19 +17,11 @@ public class user extends LitePalSupport {
         this.name = name;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

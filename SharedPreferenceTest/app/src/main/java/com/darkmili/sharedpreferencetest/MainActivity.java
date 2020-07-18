@@ -10,62 +10,68 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button button_login=null;
-    EditText editText_user=null;
-    EditText editText_pass=null;
-    CheckBox checkBox_save=null;
-    SharedPreferences preferences=null;
+    Button button_login = null;
+    EditText editText_user = null;
+    EditText editText_pass = null;
+    CheckBox checkBox_save = null;
+    SharedPreferences preferences = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        preferences= getSharedPreferences("data",MODE_PRIVATE);
-        button_login=findViewById(R.id.button_login);
-        editText_user=findViewById(R.id.username_edit);
-        editText_pass=findViewById(R.id.password_edit);
-        checkBox_save=findViewById(R.id.checkbox_save);
+        preferences = getSharedPreferences("data", MODE_PRIVATE);
+        button_login = findViewById(R.id.button_login);
+        editText_user = findViewById(R.id.username_edit);
+        editText_pass = findViewById(R.id.password_edit);
+        checkBox_save = findViewById(R.id.checkbox_save);
 
 //
-        if (preferences.getBoolean("check",false)){
-            editText_user.setText(preferences.getString("username",""));
-            editText_pass.setText(preferences.getString("password",""));
+        if (preferences.getBoolean("check", false)) {
+            editText_user.setText(preferences.getString("username", ""));
+            editText_pass.setText(preferences.getString("password", ""));
             checkBox_save.setChecked(true);
 
-        }else {
+        } else {
             checkBox_save.setChecked(false);
         }
+
+
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check(editText_user,editText_pass)){
-                    startActivity(new Intent(MainActivity.this,Main2Activity.class));
+                if (check(editText_user, editText_pass)) {
+                    startActivity(new Intent(MainActivity.this, Main2Activity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), "账号密码错误，请从新输入", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    public boolean check(EditText editTextu,EditText editTextp){
+    public boolean check(EditText editTextu, EditText editTextp) {
         SharedPreferences.Editor edit = preferences.edit();
-        if (checkBox_save.isChecked()){
-            edit.putString("username",editTextu.getText().toString());
-            edit.putString("password",editTextp.getText().toString());
-            edit.putBoolean("check",true);
+        if (checkBox_save.isChecked()) {
+            edit.putString("username", editTextu.getText().toString());
+            edit.putString("password", editTextp.getText().toString());
+            edit.putBoolean("check", true);
 
-        }else {
-            edit.putString("username","");
-            edit.putString("password","");
-            edit.putBoolean("check",false);
+        } else {
+            edit.putString("username", "");
+            edit.putString("password", "");
+            edit.putBoolean("check", false);
 
         }
         edit.apply();
-        if ("lyh".equals(editTextu.getText().toString())&&"123".equals(editTextp.getText().toString())){
+        if ("lyh".equals(editTextu.getText().toString()) && "123".equals(editTextp.getText().toString())) {
 
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
-
 }

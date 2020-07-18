@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<litepal>
+<dbname value="bookstore"/>
+    <version value="1"/>
+    <list>
+        <mapping class="com.darkmili.sqlitetest.User"/>
+    </list>
+
+</litepal>

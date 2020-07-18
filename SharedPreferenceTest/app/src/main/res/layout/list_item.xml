@@ -8,13 +8,14 @@
         android:id="@+id/list_item_image"
         android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:src="@color/colorAccent"/>
+        android:src="@color/colorAccent" />
+
     <TextView
         android:id="@+id/list_item_text"
-        android:text="好友名称"
-        android:gravity="start|center_vertical"
         android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_height="match_parent"/>
+        android:gravity="start|center_vertical"
+        android:text="好友名称" />
 
 </LinearLayout>

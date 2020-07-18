@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffff"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    tools:ignore="MissingDefaultResource">
 
     <View
         android:layout_width="match_parent"
