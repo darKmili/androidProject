@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 public class MyServiceBind extends Service {
     private int count=0;
     private boolean quit;
-    private MyBinder myBinder;
+    private MyBinder myBinder=new MyBinder();
 
     class MyBinder extends Binder {
        public int getCount(){
@@ -21,7 +21,7 @@ public class MyServiceBind extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return myBinder;
     }
 
     public MyServiceBind() {
