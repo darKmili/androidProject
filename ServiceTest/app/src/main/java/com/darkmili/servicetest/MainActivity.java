@@ -2,43 +2,56 @@ package com.darkmili.servicetest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.telecom.Connection;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button start;
     private Button stop;
-    private Button step;
+
+    private ServiceConnection connection= new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            ((MyService.Mybind)iBinder).show();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         start=findViewById(R.id.button1);
         stop=findViewById(R.id.button2);
-        step=findViewById(R.id.button3);
-         final Intent intent=new Intent(MainActivity.this,com.darkmili.servicetest.MyService.class);
-        intent.setPackage(MainActivity.this.getPackageName());
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startService(intent);
-            }
-        });
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                stopService(intent);
-            }
-        });
-        step.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                startActivity(intent);
 
-            }
-        });
+
+        start.setOnClickListener(this);
+
+        stop.setOnClickListener(this);
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.button1:
+                Intent intent=new Intent(this,MyService.class);
+                bindService(intent,connection,BIND_AUTO_CREATE);
+                break;
+            case R.id.button2:
+                unbindService(connection);
+                break;
+            default:
+        }
     }
 }

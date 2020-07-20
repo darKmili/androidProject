@@ -2,6 +2,7 @@ package com.darkmili.servicetest;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -9,6 +10,12 @@ import androidx.annotation.Nullable;
 
 public class MyService extends Service {
     private static final String TAG="MyService";
+    private Mybind mybind;
+    class Mybind extends Binder{
+        public void show(){
+            Log.d("MyService","BindService");
+        }
+    }
 
     //必须实现的方法
     @Nullable
@@ -16,7 +23,7 @@ public class MyService extends Service {
     public IBinder onBind(Intent intent) {
         Log.v(TAG,"OnBind");
 
-        return null;
+        return mybind;
     }
 
     public MyService() {
