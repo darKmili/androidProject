@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Button
+        android:id="@+id/re_bt_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLogin"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:text="@string/tx_register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/re_im_pass"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="70dp"
+        android:background="@mipmap/pear"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@id/re_bt_login"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:id="@+id/re_ed_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="10dp"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@id/re_bt_login"
+        app:layout_constraintRight_toLeftOf="@id/re_im_pass" />
+
+    <ImageView
+        android:id="@+id/re_im_name"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="70dp"
+        android:background="@mipmap/banana"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@id/re_ed_pass"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:id="@+id/re_ed_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/re_ed_pass"
+        app:layout_constraintLeft_toRightOf="@id/re_im_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
