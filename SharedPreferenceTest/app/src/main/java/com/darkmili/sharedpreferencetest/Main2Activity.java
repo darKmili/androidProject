@@ -31,7 +31,7 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         Button button = findViewById(R.id.bottom_button_left);
-        button.setBackgroundColor(R.color.colorButton);
+        button.setBackgroundResource(R.drawable.shape_2);
 
 
         initList();
