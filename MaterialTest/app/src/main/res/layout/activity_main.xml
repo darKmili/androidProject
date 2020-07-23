@@ -23,6 +23,11 @@
             android:background="@color/colorPrimary"
             android:popupTheme="@style/Theme.AppCompat.Light"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:layout_height="match_parent"/>
 
 <!--        floatButton和普通按钮一样，除了悬浮-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton

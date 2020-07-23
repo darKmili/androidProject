@@ -19,42 +19,37 @@ import com.example.listviewtest.entity.Fruit;
 import java.util.List;
 
 public class FruitAdapter extends ArrayAdapter<Fruit> {
-    private Integer resourceId;
+    private int resource;
 
-    public FruitAdapter(@NonNull Context context, int textViewResourceId, @NonNull List<Fruit> objects) {
-        super(context, textViewResourceId, objects);
-        this.resourceId = textViewResourceId;
+    public FruitAdapter(@NonNull Context context, int resource, @NonNull List<Fruit> objects) {
+        super(context, resource, objects);
+        this.resource=resource;
     }
+
+
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Fruit aFruit = getItem(position);//获取当前项的fruit实例
-
-        //convertView用作将之前的View缓存,增加view的重用
+        Fruit item = getItem(position);
+        ViewHolder viewHolder = null;
         View view;
-        ViewHolder viewHolder;
-        if (convertView != null) {
-            view = convertView;
-            viewHolder = (ViewHolder) view.getTag();
-        } else {
-            view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
-            viewHolder = new ViewHolder();
-            viewHolder.imageView = (ImageView) view.findViewById(R.id.fruit_image);
-            viewHolder.textView = (TextView) view.findViewById(R.id.fruit_name);
+        if (convertView==null){
+            view=LayoutInflater.from(getContext()).inflate(R.layout.fruit_item,parent,false);
+            viewHolder=new ViewHolder();
+            viewHolder.imageView=view.findViewById(R.id.fruit_image);
+            viewHolder.textView=view.findViewById(R.id.fruit_name);
             view.setTag(viewHolder);
+
+        }else {
+            view=convertView;
+            viewHolder=(ViewHolder) view.getTag();
         }
-
-        viewHolder.imageView.setImageResource(aFruit.getImageId());//
-        viewHolder.textView.setText(aFruit.getName());//
+        viewHolder.imageView.setImageResource(item.getImageId());
+        viewHolder.textView.setText(item.getName());
         return view;
-
     }
-
-    /**
-     * 减少view.findViewById的操作
-     */
-    class ViewHolder {
+    class ViewHolder{
         ImageView imageView;
         TextView textView;
     }

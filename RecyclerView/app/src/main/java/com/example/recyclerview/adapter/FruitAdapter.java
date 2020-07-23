@@ -1,16 +1,12 @@
 package com.example.recyclerview.adapter;
 
-import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recyclerview.R;
@@ -18,18 +14,19 @@ import com.example.recyclerview.entity.Fruit;
 
 import java.util.List;
 
-public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> {
+public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.MyViewHolder> {
     private List<Fruit> fruitList;
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        View view;
         ImageView imageView;
         TextView textView;
-        View fruitView;
-        public ViewHolder(@NonNull View itemView) {
-//            itemView子项的最外层布局
+
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            fruitView=itemView;
-            imageView=(ImageView)itemView.findViewById(R.id.image1);
-            textView=(TextView)itemView.findViewById(R.id.text1);
+            view=itemView;
+            imageView=itemView.findViewById(R.id.image1);
+            textView=itemView.findViewById(R.id.text1);
+
         }
     }
 
@@ -39,34 +36,17 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
-        final ViewHolder viewHolder=new ViewHolder(view);
-        viewHolder.fruitView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = viewHolder.getAdapterPosition();
-                Fruit fruit = fruitList.get(position);
-                Toast.makeText(view.getContext(),"your clickded"+fruit.getName(),Toast.LENGTH_LONG).show();
-            }
-        });
-
-        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = viewHolder.getAdapterPosition();
-                Fruit fruit = fruitList.get(position);
-                Toast.makeText(view.getContext(),"your clickded"+fruit.getImageId(),Toast.LENGTH_LONG).show();
-            }
-        });
+        MyViewHolder viewHolder=new MyViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Fruit fruit=fruitList.get(position);
-            holder.textView.setText(fruit.getName());
-            holder.imageView.setImageResource(fruit.getImageId());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Fruit fruit = fruitList.get(position);
+        holder.textView.setText(fruit.getName());
+        holder.imageView.setImageResource(fruit.getImageId());
 
     }
 
@@ -76,4 +56,6 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
     public int getItemCount() {
         return fruitList.size();
     }
+
+
 }

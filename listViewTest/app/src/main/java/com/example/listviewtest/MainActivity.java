@@ -22,11 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initFruits();
-        //默认使用android.R.layout.simple_list_item_1
-        FruitAdapter adapter=new FruitAdapter(MainActivity.this,R.layout.fruit_item,fruits);
-        ListView listView=(ListView)findViewById(R.id.list1);
-        listView.setAdapter(adapter);
-
+        FruitAdapter fruitAdapter=new FruitAdapter(MainActivity.this,R.layout.fruit_item,fruits);
+        ListView listView=findViewById(R.id.list1);
+        listView.setAdapter(fruitAdapter);
         //为子项添加点击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -22,16 +22,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initFruits();
-        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyc);
+
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 //        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        //生成layoutManager 实现滚动方式
         StaggeredGridLayoutManager staggeredGridLayoutManager=new StaggeredGridLayoutManager(4,StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        //生成自定义适配器
         FruitAdapter fruitAdapter=new FruitAdapter(fruits);
+        //生成recyclerview对象，并加载适配器与布局管理器
+        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyc);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(fruitAdapter);
     }
     public void initFruits(){
-        for (int i=0;i<2;i++){
+        for (int i=0;i<7;i++){
             fruits.add(new Fruit(R.drawable.apple_pic,"apple"));
             fruits.add(new Fruit(R.drawable.banana_pic,"banana"));
             fruits.add(new Fruit(R.drawable.cherry_pic,"cherry"));
