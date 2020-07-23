@@ -34,9 +34,7 @@
             android:src="@drawable/ic_launcher_foreground"
             android:elevation="10dp"
             tools:ignore="MissingClass" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
 
     </com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
 

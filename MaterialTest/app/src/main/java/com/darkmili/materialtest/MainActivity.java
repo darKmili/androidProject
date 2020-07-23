@@ -10,15 +10,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 
+import com.darkmili.materialtest.entity.MyApplication;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -34,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawerlayout);
         ActionBar actionBar = getSupportActionBar();
+
+        //
+        //Todo
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.mipmap.ic_menu);
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //可交互式提示
-                Snackbar.make(view, "delete", Snackbar.LENGTH_LONG).setAction("undo", new View.OnClickListener() {
+                Snackbar.make(view,"用户"+ MyApplication.getGlobalvariable(), Snackbar.LENGTH_LONG).setAction("undo", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_LONG).show();

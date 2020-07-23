@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.darkmili.materialtest.entity.MyApplication;
 import com.darkmili.materialtest.utils.LoginUtil;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         ed_name=findViewById(R.id.re_ed_name);
         ed_pass=findViewById(R.id.re_ed_pass);
         LoginUtil.register(ed_name.getText().toString(),ed_pass.getText().toString());
+        MyApplication.setGlobalvariable(ed_name.getText().toString());
         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
         startActivity(intent);
     }

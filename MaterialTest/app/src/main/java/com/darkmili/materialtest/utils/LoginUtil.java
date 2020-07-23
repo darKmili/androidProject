@@ -1,23 +1,8 @@
 package com.darkmili.materialtest.utils;
 
-
-import android.content.Context;
-
-import com.darkmili.materialtest.entity.MyApplication;
 import com.darkmili.materialtest.entity.User;
-
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,16 +10,19 @@ import java.util.Map;
  * 验证用户登录情况，以及是否保存账号用户密码，以及实现免登陆操作
  */
 public class LoginUtil {
-    private static int count;
-    private static Map<Integer, User> userMap = new HashMap<Integer, User>();
-
+    private static Map<String, User> userMap =null;
 
 
     public static boolean login_pass(String name, String pass) {
         if (name == null || pass == null)
             return false;
-        if (userMap.containsKey(Integer.parseInt(name))) {
-            User user = userMap.get(Integer.parseInt(name));
+        if (userMap == null) {
+            init();
+        }
+
+
+        if (userMap.containsKey(name)) {
+            User user = userMap.get(name);
             if (pass.equals(user.getPass())) {
                 return true;
             }
@@ -46,19 +34,29 @@ public class LoginUtil {
     }
 
     public static void register(String name, String pass) {
+        if (userMap==null)
+            init();
         //TODO 注册账号和密码，将账号密码存到hash表中
-        count++;
-        userMap.put(Integer.parseInt(name), new User(name, pass));
-        //TODO 持久化保存密码
-        try {
-            JSONObject jsonObject=new JSONObject();
-//            jsonObject.put(new User(name,pass));
-            FileOutputStream outputStream = MyApplication.getContext().openFileOutput("user", Context.MODE_APPEND);
-            BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(outputStream));
+        User user = new User(name, pass);
+        userMap.put(name, user);
+        save();
+    }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    //数据永久保存
+    public static void save() {
+        Gson gson = new Gson();
+        String s = gson.toJson(userMap);
+        FileUtil.writer_file("user", s);
+    }
+
+    public static void init() {
+        userMap=new HashMap<>();
+        //初始化用户表单
+        String userStr = FileUtil.reader_file("user");
+        Gson gson = new Gson();
+        userMap = gson.fromJson(userStr, new TypeToken<HashMap<String, User>>() {
+        }.getType());
+
     }
 
 }
