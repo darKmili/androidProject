@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname name=""/>
-    <version value="1"/>
+    <dbname name="" />
+    <version value="1" />
     <list>
-
+        <mapping class="com.darkmili.coolweather.db.City" />
+        <mapping class="com.darkmili.coolweather.db.Province" />
+        <mapping class="com.darkmili.coolweather.db.County" />
     </list>
 </litepal>

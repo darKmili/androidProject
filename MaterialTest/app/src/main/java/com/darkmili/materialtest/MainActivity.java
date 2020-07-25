@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerlayout);
         ActionBar actionBar = getSupportActionBar();
         init();
-        LinearLayoutManager manager=new LinearLayoutManager(this);
+//        LinearLayoutManager manager=new LinearLayoutManager(this);
+        GridLayoutManager manager=new GridLayoutManager(this,2);
         manager.setOrientation(RecyclerView.VERTICAL);
         PersonAdapter adapter=new PersonAdapter(list);
         RecyclerView recyclerView=findViewById(R.id.recycler);
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view,"用户"+ MyApplication.getGlobalvariable(), Snackbar.LENGTH_LONG).setAction("undo", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_LONG).show();
                     }
                 }).show();

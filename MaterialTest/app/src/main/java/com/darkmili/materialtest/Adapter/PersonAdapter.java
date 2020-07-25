@@ -9,7 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.darkmili.materialtest.R;
+import com.darkmili.materialtest.entity.MyApplication;
 import com.darkmili.materialtest.entity.Person;
 
 import java.util.List;
@@ -33,7 +35,9 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Person person = list.get(position);
         holder.textView.setText(person.getName());
-        holder.imageView.setImageResource(person.getIma_id());
+//        holder.imageView.setImageResource(person.getIma_id());
+        //通过Glide加载图片，因为文件过大会导致图片溢出
+        Glide.with(MyApplication.getContext()).load(person.getIma_id()).into(holder.imageView);
     }
 
     @Override
