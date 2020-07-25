@@ -1,6 +1,9 @@
 package com.darkmili.coolweather.db;
 
-public class City {
+import org.litepal.crud.DataSupport;
+import org.litepal.exceptions.DataSupportException;
+
+public class City extends DataSupport {
     private  int id;
     private String name;
     private int cityCode;
