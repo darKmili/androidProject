@@ -3,8 +3,11 @@ package com.darkmili.coolweather.db;
 import org.litepal.crud.DataSupport;
 
 public class Province extends DataSupport {
+
     private int id;
-    private String cityName;
+
+    private String provinceName;
+
     private int provinceCode;
 
     public int getId() {
@@ -15,12 +18,12 @@ public class Province extends DataSupport {
         this.id = id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getProvinceName() {
+        return provinceName;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 
     public int getProvinceCode() {

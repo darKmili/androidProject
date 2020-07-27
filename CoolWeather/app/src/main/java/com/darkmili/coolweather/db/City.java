@@ -1,13 +1,16 @@
 package com.darkmili.coolweather.db;
 
 import org.litepal.crud.DataSupport;
-import org.litepal.exceptions.DataSupportException;
 
 public class City extends DataSupport {
-    private  int id;
-    private String name;
+
+    private int id;
+
+    private String cityName;
+
     private int cityCode;
-    private  int provinceId;
+
+    private int provinceId;
 
     public int getId() {
         return id;
@@ -17,12 +20,12 @@ public class City extends DataSupport {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public int getCityCode() {
@@ -40,4 +43,5 @@ public class City extends DataSupport {
     public void setProvinceId(int provinceId) {
         this.provinceId = provinceId;
     }
+
 }
