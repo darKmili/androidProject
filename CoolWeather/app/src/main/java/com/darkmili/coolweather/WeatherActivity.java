@@ -14,17 +14,21 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.bumptech.glide.Glide;
 import com.darkmili.coolweather.gson.Forecast;
 import com.darkmili.coolweather.gson.Weather;
 import com.darkmili.coolweather.service.AutoUpdateService;
 import com.darkmili.coolweather.util.HttpUtil;
 import com.darkmili.coolweather.util.Utility;
+
 import java.io.IOException;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -63,6 +67,8 @@ public class WeatherActivity extends AppCompatActivity {
 
     private String mWeatherId;
 
+    private Button bt_set;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,14 +93,17 @@ public class WeatherActivity extends AppCompatActivity {
         comfortText = (TextView) findViewById(R.id.comfort_text);
         carWashText = (TextView) findViewById(R.id.car_wash_text);
         sportText = (TextView) findViewById(R.id.sport_text);
+        //加载刷新布局
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorAccent);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navButton = (Button) findViewById(R.id.nav_button);
+        bt_set=(Button) findViewById(R.id.bt_set);
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
+
         if (weatherString != null) {
             // 有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
@@ -103,19 +112,39 @@ public class WeatherActivity extends AppCompatActivity {
         } else {
             // 无缓存时去服务器查询天气
             mWeatherId = getIntent().getStringExtra("weather_id");
+            //由于界面此时没有数据所有会不好看，因此隐藏数据
             weatherLayout.setVisibility(View.INVISIBLE);
             requestWeather(mWeatherId);
         }
+
+        //设置刷新事件监听器
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 requestWeather(mWeatherId);
             }
         });
+
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                打开侧边栏
                 drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        bt_set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean flag=true;
+            //关闭或者打开自动更新服务
+                if (flag){
+                    //关闭
+                    Intent intent = new Intent(WeatherActivity.this, AutoUpdateService.class);
+                    stopService(intent);
+
+                }
+                flag=false;
             }
         });
         String bingPic = prefs.getString("bing_pic", null);
@@ -126,15 +155,25 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
+
+//    //加载左上部选项菜单
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.right_menu,menu);
+//        return true;
+//    }
+
     /**
      * 根据天气id请求城市天气信息。
      */
     public void requestWeather(final String weatherId) {
+        //构造请求地址
         String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=097249ad08104b5780ce10ad46562aa0";
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
+                //对请求返回数据字符串进行处理
                 final Weather weather = Utility.handleWeatherResponse(responseText);
                 //加载数据完成后回到主线程更新数据
                 runOnUiThread(new Runnable() {
@@ -209,9 +248,11 @@ public class WeatherActivity extends AppCompatActivity {
         titleUpdateTime.setText(updateTime);
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
+        //移除数据，然后从新填充
         forecastLayout.removeAllViews();
 //        for (int i=0;i<2;i++)
         for (Forecast forecast : weather.forecastList) {
+            //生成布局填充器，加载子项布局
             View view = LayoutInflater.from(this).inflate(R.layout.forecast_item, forecastLayout, false);
             TextView dateText = (TextView) view.findViewById(R.id.date_text);
             TextView infoText = (TextView) view.findViewById(R.id.info_text);
@@ -221,6 +262,7 @@ public class WeatherActivity extends AppCompatActivity {
             infoText.setText(forecast.more.info);
             maxText.setText(forecast.temperature.max);
             minText.setText(forecast.temperature.min);
+            //在父布局里添加子项布局
             forecastLayout.addView(view);
         }
         if (weather.aqi != null) {
@@ -234,6 +276,7 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        //启动定时自动刷新服务
         Intent intent = new Intent(this, AutoUpdateService.class);
         startService(intent);
     }

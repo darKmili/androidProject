@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mn_share"
+            android:title="分享天气" />
+        <item
+            android:id="@+id/mn_feedback"
+            android:title="反馈" />
+        <item
+            android:id="@+id/mn_set"
+            android:title="设置" />
+    </group>
+</menu>
