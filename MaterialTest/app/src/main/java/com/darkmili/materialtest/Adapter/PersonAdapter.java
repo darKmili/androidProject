@@ -1,5 +1,8 @@
 package com.darkmili.materialtest.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,9 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.darkmili.materialtest.FruitActivity;
+import com.darkmili.materialtest.MainActivity;
 import com.darkmili.materialtest.R;
 import com.darkmili.materialtest.entity.MyApplication;
 import com.darkmili.materialtest.entity.Person;
@@ -25,9 +31,24 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.MyViewHold
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_item,parent,false);
-        MyViewHolder viewHolder=new MyViewHolder(view);
+        final MyViewHolder viewHolder=new MyViewHolder(view);
+        //为图片增加监听器
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position=viewHolder.getAdapterPosition();
+                Context myContext=parent.getContext();
+                Intent intent = new Intent(myContext, FruitActivity.class);
+                Bundle bundle = new Bundle();
+                Person person = list.get(position);
+                bundle.putString(FruitActivity.FRUIT_NAME,person.getName());
+                bundle.putInt(FruitActivity.FRUIT_IMAGE_ID,person.getIma_id());
+                intent.putExtra("person_bundle",bundle);
+                myContext.startActivity(intent);
+            }
+        });
         return viewHolder;
     }
 
@@ -49,11 +70,13 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.MyViewHold
         ImageView imageView;
         TextView textView;
         View view;
+        CardView cardView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             view=itemView;
             imageView=itemView.findViewById(R.id.item_image);
             textView=itemView.findViewById(R.id.item_text);
+            cardView=itemView.findViewById(R.id.card_view);
         }
     }
 }
