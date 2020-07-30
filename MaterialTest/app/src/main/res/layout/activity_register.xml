@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#ECE1E1"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <Button
         android:id="@+id/re_bt_login"
@@ -20,7 +21,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="70dp"
-        android:background="@mipmap/pear"
+        android:background="@mipmap/ic_settings"
         android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toTopOf="@id/re_bt_login"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -41,7 +42,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="70dp"
-        android:background="@mipmap/banana"
+        android:background="@mipmap/ic_comment"
         android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toTopOf="@id/re_ed_pass"
         app:layout_constraintLeft_toLeftOf="parent" />

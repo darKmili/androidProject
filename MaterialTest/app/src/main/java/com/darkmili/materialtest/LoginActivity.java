@@ -27,10 +27,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Button bt_login, bt_register, bt_error;
     private EditText ed_name, ed_pass;
-    private final static int LOGIN_ENABLE = 1;
-    private final static int LOGIN_UNABLF = 2;
-    private final static int PASS_ERROR = 3;
-    private final static int NAME_ERROR = 4;  //上面是消息的常量值
     private CheckBox checkBox;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -100,7 +96,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //处理登录操作
                 break;
             case R.id.bt_register:
-                //TODO 处理注册,跳转到注册页面
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 break;

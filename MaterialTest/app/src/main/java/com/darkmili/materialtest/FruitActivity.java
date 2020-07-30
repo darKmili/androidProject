@@ -57,10 +57,10 @@ public class FruitActivity extends AppCompatActivity {
         collapsingToolbarLayout.setTitle(name);
         Glide.with(this).load(imageId).into(imageView);
         textView.setText(generateContent(name));
-
+        textView.setTextSize(25);
 
     }
-
+    //展示测试
     public String generateContent(String s) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 1200; i++) {
