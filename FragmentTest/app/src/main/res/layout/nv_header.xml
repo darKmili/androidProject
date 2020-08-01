@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="250dp"
     android:background="@color/colorPrimary"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:ignore="MissingConstraints">
+
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@mipmap/pear_pic"
-        android:layout_gravity="start|center_vertical"
-        android:layout_marginStart="50dp"/>
+        android:id="@+id/nv_header_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="70dp"
+        android:src="@mipmap/pear_pic" />
+
+    <TextView
+        android:id="@+id/nv_header_text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_below="@id/nv_header_image"
+        android:layout_alignLeft="@id/nv_header_image"
+        android:layout_marginTop="8dp"
+        android:text="飞鱼奈何天" />
+
+    <TextView
+        android:id="@+id/nv_header_text_email"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_below="@id/nv_header_text_name"
+        android:layout_alignLeft="@id/nv_header_image"
+        android:layout_marginTop="8dp"
+        android:text="tommeoikeheis@email.com" />
 
 
-</LinearLayout>
+</RelativeLayout>
