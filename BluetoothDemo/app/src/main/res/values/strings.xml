@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BluetoothDemo</string>
+    <string name="start_bluetooth">启动蓝牙</string>
+</resources>

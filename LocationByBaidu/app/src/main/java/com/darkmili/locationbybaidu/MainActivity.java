@@ -1,26 +1,74 @@
 package com.darkmili.locationbybaidu;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private LocationClient locationClient;
     private TextView textView;
-
+    private Button button;
+    private List<String> permissionsList;
+    public static final int REQUEST_CODE=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initLocationOption();
+
         setContentView(R.layout.activity_main);
         textView=findViewById(R.id.location);
+        button=findViewById(R.id.bt_getLocation);
+        permissionsList=new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            permissionsList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CHANGE_WIFI_STATE)!= PackageManager.PERMISSION_GRANTED){
+            permissionsList.add(Manifest.permission.CHANGE_WIFI_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED){
+            permissionsList.add(Manifest.permission.INTERNET);
+        }
+        if (!permissionsList.isEmpty()){
+            String[] permissions=permissionsList.toArray(new String[permissionsList.size()]);
+            ActivityCompat.requestPermissions(MainActivity.this,permissions,REQUEST_CODE);
+        }
+        initLocationOption();
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode==REQUEST_CODE){
+            if (grantResults.length>0){
+                for (int result:grantResults){
+                    if (result!=PackageManager.PERMISSION_GRANTED){
+                        Toast.makeText(MainActivity.this,"权限不足",Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+                initLocationOption();
+            }else {
+                Toast.makeText(MainActivity.this,"权限不足",Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     /**
@@ -78,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 //更多LocationClientOption的配置，请参照类参考中LocationClientOption类的详细说明
         locationClient.setLocOption(locationOption);
 //开始定位
-        locationClient.start();
+    locationClient.start();
     }
     /**
      * 实现定位回调
@@ -100,9 +148,8 @@ public class MainActivity extends AppCompatActivity {
             String coorType = location.getCoorType();
             //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
             int errorCode = location.getLocType();
+            textView.setText(latitude+"---"+longitude);
 
-            String city = location.getCity();
-            textView.setText(city);
         }
     }
 

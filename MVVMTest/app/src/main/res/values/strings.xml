@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MVVMTest</string>
+    <string name="first">第一个案列</string>
+    <string name="first_demo_id">这是Id</string>
+    <string name="first_demo_name">这是名字</string>
+    <string name="second">第二个案例</string>
+</resources>

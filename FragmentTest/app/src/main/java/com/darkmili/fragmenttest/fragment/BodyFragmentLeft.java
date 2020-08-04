@@ -4,36 +4,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.darkmili.fragmenttest.R;
-import com.darkmili.fragmenttest.adapter.PersonAdapter;
 import com.darkmili.fragmenttest.adapter.TabAdapter;
-import com.darkmili.fragmenttest.entity.Person;
 import com.darkmili.fragmenttest.entity.TabItem;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class BodyFragmentLeft extends Fragment {
     private RecyclerView recyclerViewHor;
     private TabAdapter tabAdapter;
     private List<TabItem> tabItemList = new ArrayList<>();
-//    private TextView textView1;
-//    private TextView textView2;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
+        initData();
     }
 
     @Nullable
@@ -56,7 +50,7 @@ public class BodyFragmentLeft extends Fragment {
     }
 
 
-    public void init() {
+    public void initData() {
 
         for (int i = 0; i < 3; i++) {
             tabItemList.add(new TabItem(R.mipmap.ic_comment, "消息"));
