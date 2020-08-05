@@ -59,5 +59,33 @@
         app:layout_constraintTop_toBottomOf="@+id/re_linked"
         tools:layout_editor_absoluteX="0dp" />
 
+    <Button
+        android:id="@+id/bt_be_searched"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:text="@string/bt_be_searched"
+        app:layout_constraintStart_toEndOf="@+id/start_bluetooth"
+        app:layout_constraintTop_toTopOf="@+id/start_bluetooth" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/re_unlink"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/bt_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,13 +20,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.darkmili.bluetoothdemo.adapter.BlueToothRecyclerViewAdapter;
-import com.darkmili.bluetoothdemo.entity.BlueTooth;
+import com.darkmili.bluetoothdemo.service.AcceptThread;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,13 +43,23 @@ import static android.content.ContentValues.TAG;
 public class MainActivity extends AppCompatActivity {
     private List<String> listPermissions;
     private BluetoothAdapter bluetoothAdapter;
-    private Button bt_start_bluetooth;
-    private ArrayList<BlueTooth> list_linked;
-    private ArrayList<BlueTooth> list_unlink = new ArrayList<>();
+    private Button bt_start_bluetooth, bt_be_searched;
+    private ArrayList<BluetoothDevice> list_linked;
+    private ArrayList<BluetoothDevice> list_unlink = new ArrayList<>();
     private RecyclerView recyclerView_linked;
     private RecyclerView recyclerView_unlink;
     private BlueToothRecyclerViewAdapter adapter;
     private LinearLayoutManager manager;
+    private TextView textView;
+    private Handler handler=new Handler(getMainLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            textView=findViewById(R.id.textView2);
+            textView.setText(msg.toString());
+        }
+    };
+    private int flag=0;
     public static final int REQUEST_CODE = 1;
     public static final int REQUEST_ENABLE_BT = 2;
     // Create a BroadcastReceiver for ACTION_FOUND.
@@ -57,16 +72,15 @@ public class MainActivity extends AppCompatActivity {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 String deviceName = device.getName();
                 String deviceHardwareAddress = device.getAddress(); // MAC address
-                BlueTooth blueTooth = new BlueTooth(deviceName, deviceHardwareAddress);
-                int a=0;
-                for (BlueTooth b:list_unlink){
-                    if (b.getMACAddress().equals(blueTooth.getMACAddress())){
-                        a=1;
+                int a = 0;
+                for (BluetoothDevice b : list_unlink) {
+                    if (b.getAddress().equals(deviceHardwareAddress)) {
+                        a = 1;
                         break;
                     }
                 }
-                if (a==0)
-                list_unlink.add(blueTooth);
+                if (a == 0)
+                    list_unlink.add(device);
                 adapter.notifyDataSetChanged();
             }
         }
@@ -91,10 +105,28 @@ public class MainActivity extends AppCompatActivity {
                 bluetoothAdapter.startDiscovery();
             }
         });
+        bt_be_searched.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (flag == 0) {
+                    Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+                    discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+                    startActivity(discoverableIntent);
+                     new AcceptThread().start();
+                    flag=1;
+                }else {
+                    Toast.makeText(MyApplication.getContext(),"已经可以被搜索",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
+
 
     public void init() {
         listPermissions = new ArrayList<>();
+        bt_be_searched = findViewById(R.id.bt_be_searched);
         bt_start_bluetooth = findViewById(R.id.start_bluetooth);
     }
 
@@ -166,18 +198,10 @@ public class MainActivity extends AppCompatActivity {
     //连接设备
     //如要在两台设备之间创建连接，您必须同时实现服务器端和客户端机制，因为其中一台设备必须开放服务器套接字，而另一台设备必须使用服务器设备的 MAC 地址发起连接
     //一种实现技术是自动将每台设备准备为一个服务器，从而使每台设备开放一个服务器套接字并侦听连接。在此情况下，任一设备都可发起与另一台设备的连接，并成为客户端。
-    public Set<BlueTooth> search() {
+    public Set<BluetoothDevice> search() {
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
-        Set<BlueTooth> blueTooths = new HashSet<>();
-        if (pairedDevices.size() > 0) {
-            // There are paired devices. Get the name and address of each paired device.
-            for (BluetoothDevice device : pairedDevices) {
-                String deviceName = device.getName();
-                String deviceHardwareAddress = device.getAddress(); // MAC address
-                blueTooths.add(new BlueTooth(deviceName, deviceHardwareAddress));
-            }
-        }
-        return blueTooths;
+
+        return pairedDevices;
     }
 
     public void setBluetoothAdapterLinked() {

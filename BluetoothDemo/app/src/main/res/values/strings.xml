@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BluetoothDemo</string>
     <string name="start_bluetooth">启动蓝牙</string>
+    <string name="bt_be_searched">可被搜索</string>
 </resources>

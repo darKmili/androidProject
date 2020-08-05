@@ -1,5 +1,6 @@
 package com.darkmili.bluetoothdemo.adapter;
 
+import android.bluetooth.BluetoothDevice;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.darkmili.bluetoothdemo.R;
-import com.darkmili.bluetoothdemo.entity.BlueTooth;
+import com.darkmili.bluetoothdemo.service.ConnectThread;
+import com.darkmili.bluetoothdemo.service.MyBluetoothService;
 
 import java.util.ArrayList;
 
 public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueToothRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<BlueTooth> list;
+    private ArrayList<BluetoothDevice> list;
 
-    public BlueToothRecyclerViewAdapter(ArrayList<BlueTooth> list) {
+    public BlueToothRecyclerViewAdapter(ArrayList<BluetoothDevice> list) {
         this.list = list;
     }
 
@@ -31,9 +33,8 @@ public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueTooth
             public void onClick(View view) {
                 //通过点击事件去执行连接操作
                 int adapterPosition = viewHolder.getAdapterPosition();
-                String MACAddress=list.get(adapterPosition).getMACAddress();
-                //TODO 根据MAC地址去连接蓝牙
-                Toast.makeText(parent.getContext(), "点击了"+list.get(adapterPosition).getName(), Toast.LENGTH_LONG).show();
+                BluetoothDevice device=list.get(adapterPosition);
+                new ConnectThread(device.getAddress()).start();
             }
         });
         return viewHolder;
@@ -41,8 +42,8 @@ public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueTooth
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        BlueTooth s = list.get(position);
-        holder.textView.setText(s.toString());
+        BluetoothDevice device = list.get(position);
+        holder.textView.setText(device.getName()+"---"+device.getAddress());
     }
 
     @Override

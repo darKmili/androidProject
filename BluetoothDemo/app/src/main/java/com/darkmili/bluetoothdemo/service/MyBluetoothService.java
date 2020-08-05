@@ -10,10 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class MyBluetoothService {
     public  class MyBluetoothService {
         private static final String TAG = "MY_APP_DEBUG_TAG";
-        private Handler handler; // handler that gets info from Bluetooth service
+        private static Handler handler; // handler that gets info from Bluetooth service
 
         // Defines several constants used when transmitting messages between the
         // service and the UI.
@@ -25,7 +24,7 @@ public class MyBluetoothService {
             // ... (Add other message types here as needed.)
         }
 
-        private class ConnectedThread extends Thread {
+        public static class ConnectedThread extends Thread {
             private final BluetoothSocket mmSocket;
             private final InputStream mmInStream;
             private final OutputStream mmOutStream;
@@ -90,8 +89,7 @@ public class MyBluetoothService {
                     Message writeErrorMsg =
                             handler.obtainMessage(MessageConstants.MESSAGE_TOAST);
                     Bundle bundle = new Bundle();
-                    bundle.putString("toast",
-                            "Couldn't send data to the other device");
+                    bundle.putString("toast", "Couldn't send data to the other device");
                     writeErrorMsg.setData(bundle);
                     handler.sendMessage(writeErrorMsg);
                 }
@@ -107,4 +105,3 @@ public class MyBluetoothService {
             }
         }
     }
-}

@@ -115,6 +115,7 @@ public class DownloadService extends Service {
         return (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
+    @SuppressWarnings("deprecation")
     private Notification getNotification(String title, int progress) {
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
