@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         switch (v.getId()) {
             case R.id.start:
-                String url = "http://guolin.tech/api/china";
+                String url = "https://api.caiyunapp.com/v2.5/iBPOWAGy7dk0NmN8/121.6544,25.1552/realtime.json";
                 downloadBinder.startDownload(url);
                 break;
             case R.id.pause:
@@ -93,74 +93,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 }
-//public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-//    public DownloadService.DownloadBinder downloadBinder;
-//    ServiceConnection connection=new ServiceConnection() {
-//        @Override
-//        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-//            downloadBinder=(DownloadService.DownloadBinder)iBinder;
-//        }
-//        @Override
-//        public void onServiceDisconnected(ComponentName componentName) {
-//
-//        }
-//    };
-//
-//    private Button start;
-//    private Button pause;
-//    private Button cancel;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//        start=findViewById(R.id.start);
-//        pause=findViewById(R.id.pause);
-//        cancel=findViewById(R.id.cancel);
-//        start.setOnClickListener(this);
-//        pause.setOnClickListener(this);
-//        cancel.setOnClickListener(this);
-//        Intent intent=new Intent(this,DownloadService.class);
-//        startService(intent);
-//        bindService(intent,connection,BIND_AUTO_CREATE);
-////        权限申请
-//        if (ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
-//            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-//        }
-//    }
-//
-//    @Override
-//    public void onClick(View view) {
-//        if (downloadBinder==null){
-//            return;
-//        }
-//        switch (view.getId()){
-//            case R.id.start:
-//                String url="http://guolin.tech/api/bing_pic";
-//                downloadBinder.startDownload(url);
-//                break;
-//            case R.id.pause:
-//                downloadBinder.pauseDownload();
-//                break;
-//            case R.id.cancel:
-//                downloadBinder.cancelDownload();
-//                break;
-//        }
-//    }
-//    //权限申请
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if (requestCode==1){
-//            if (grantResults.length>0&&grantResults[0]!= PackageManager.PERMISSION_GRANTED){
-//                Toast.makeText(this,"get permission failed",Toast.LENGTH_LONG).show();
-//                //结束下载活动
-//                finish();
-//            }
-//        }
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        unbindService(connection);
-//    }
-//}

@@ -138,37 +138,29 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
         isCanceled = true;
     }
 
-    private long getContentLength(String downloadUrl) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(downloadUrl)
-                .build();
-        Response response = client.newCall(request).execute();
-        if (response != null && response.isSuccessful()) {
-            long contentLength = response.body().contentLength();
-            response.close();
+    private long getContentLength(final String downloadUrl) throws IOException {
+        final Response[] response = new Response[1];
+      new Thread(new Runnable() {
+          @Override
+          public void run() {
+              OkHttpClient client = new OkHttpClient();
+              Request request = new Request.Builder()
+                      .url(downloadUrl)
+                      .build();
+              try {
+                  response[0] = client.newCall(request).execute();
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+          }
+      });
+
+        if (response[0] != null && response[0].isSuccessful()) {
+            long contentLength = response[0].body().contentLength();
+            response[0].close();
             return contentLength;
         }
-        int i=0;
         return 0;
     }
-//    public long getContentLength(String url) {
-//        //判断文件大小
-//        OkHttpClient client = new OkHttpClient();
-//        Request request = new Request.Builder()
-//                .url(url)
-//                .build();
-//        try {
-//
-//            Response response = client.newCall(request).execute();
-//            if (response != null && response.isSuccessful()) {
-//                response.close();
-//                return response.body().contentLength();
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return 0;
-//    }
+
 }

@@ -16,18 +16,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tx_unlink"
         tools:layout_editor_absoluteX="0dp" />
 
+
     <Button
         android:id="@+id/start_bluetooth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:background="#fff"
         android:text="@string/start_bluetooth"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/tx_linked"
@@ -60,7 +60,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/bt_be_searched"
+        android:id="@+id/close_bluetooth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#fff"
@@ -68,24 +68,24 @@
         app:layout_constraintStart_toEndOf="@+id/start_bluetooth"
         app:layout_constraintTop_toTopOf="@+id/start_bluetooth" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <Button
+        android:id="@+id/bt_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/re_unlink"
-        tools:ignore="MissingConstraints" />
+        android:background="#fff"
+        app:layout_constraintTop_toTopOf="@+id/start_bluetooth"
+        android:text="@string/search_bluetooth"
+        app:layout_constraintStart_toEndOf="@+id/close_bluetooth"
+        tools:layout_editor_absoluteY="16dp" />
 
     <Button
-        android:id="@+id/bt_send"
+        android:id="@+id/bt_search_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发送"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="@string/search_stop"
+        android:background="#fff"
+        app:layout_constraintStart_toEndOf="@+id/bt_search"
+        app:layout_constraintTop_toTopOf="@+id/bt_search" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

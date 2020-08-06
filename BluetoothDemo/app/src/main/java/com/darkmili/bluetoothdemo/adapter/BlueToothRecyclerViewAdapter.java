@@ -1,5 +1,6 @@
 package com.darkmili.bluetoothdemo.adapter;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +11,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.darkmili.bluetoothdemo.MyApplication;
 import com.darkmili.bluetoothdemo.R;
-import com.darkmili.bluetoothdemo.service.ConnectThread;
-import com.darkmili.bluetoothdemo.service.MyBluetoothService;
+import com.inuker.bluetooth.library.beacon.Beacon;
+import com.inuker.bluetooth.library.connect.response.BleConnectResponse;
+import com.inuker.bluetooth.library.model.BleGattProfile;
+import com.inuker.bluetooth.library.search.SearchResult;
+
 
 import java.util.ArrayList;
 
-public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueToothRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<BluetoothDevice> list;
+import static com.inuker.bluetooth.library.Constants.REQUEST_SUCCESS;
 
-    public BlueToothRecyclerViewAdapter(ArrayList<BluetoothDevice> list) {
+public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueToothRecyclerViewAdapter.ViewHolder> {
+    private ArrayList<SearchResult> list;
+
+    public BlueToothRecyclerViewAdapter(ArrayList<SearchResult > list) {
         this.list = list;
     }
 
@@ -30,11 +37,21 @@ public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueTooth
         final ViewHolder viewHolder=new ViewHolder(view);
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 //通过点击事件去执行连接操作
                 int adapterPosition = viewHolder.getAdapterPosition();
-                BluetoothDevice device=list.get(adapterPosition);
-                new ConnectThread(device.getAddress()).start();
+                SearchResult  device=list.get(adapterPosition);
+                final TextView textView=view.findViewById(R.id.textView);
+                MyApplication.getClient().connect(device.getAddress(), new BleConnectResponse() {
+                    @SuppressLint("ResourceAsColor")
+                    @Override
+                    public void onResponse(int code, BleGattProfile profile) {
+                        if (code == REQUEST_SUCCESS) {
+                            Toast.makeText(MyApplication.getContext(),"连接成功",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
             }
         });
         return viewHolder;
@@ -42,7 +59,7 @@ public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueTooth
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        BluetoothDevice device = list.get(position);
+        SearchResult  device = list.get(position);
         holder.textView.setText(device.getName()+"---"+device.getAddress());
     }
 

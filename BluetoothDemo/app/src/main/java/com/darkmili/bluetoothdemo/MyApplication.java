@@ -5,22 +5,25 @@ import android.content.Context;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 
+import com.inuker.bluetooth.library.BluetoothClient;
+
 import java.util.UUID;
 
 public class MyApplication extends Application {
     private static Context context;
-    private static UUID android_id;
+    private static BluetoothClient bluetoothClient;
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-        android_id= UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
+        bluetoothClient=new BluetoothClient(context);
+
     }
 
     public static Context getContext(){
         return context;
     }
-    public static  UUID getAndroid_id(){
-        return android_id;
+    public static BluetoothClient getClient(){
+        return bluetoothClient;
     }
 }
