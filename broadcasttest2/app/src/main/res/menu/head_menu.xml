@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<group android:checkableBehavior="single">
+    <item android:id="@+id/open_item"
+        android:title="@string/open_bluetooth"
+        app:showAsAction="never"/>
+    <item android:id="@+id/close_item"
+        android:title="@string/close_bluetooth"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/can_see"
+        android:title="@string/can_see"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/see_linked"
+        android:title="@string/see_linked"
+        app:showAsAction="never"/>
+
+</group>
+</menu>

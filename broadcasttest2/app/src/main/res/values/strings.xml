@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">broadcasttest2</string>
+    <string name="is_support">是否支持蓝牙</string>
+    <string name="is_enabled">是否打开蓝牙</string>
+    <string name="open_bluetooth">打开蓝牙</string>
+    <string name="close_bluetooth">关闭蓝牙</string>
+    <string name="can_see">打开可见</string>
+    <string name="see_linked">查看配对设备</string>
 </resources>

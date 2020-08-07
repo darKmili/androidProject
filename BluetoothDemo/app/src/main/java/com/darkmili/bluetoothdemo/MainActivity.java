@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,26 @@ import android.widget.Toast;
 import com.darkmili.bluetoothdemo.adapter.BlueToothRecyclerViewAdapter;
 import com.inuker.bluetooth.library.BluetoothClient;
 import com.inuker.bluetooth.library.beacon.Beacon;
+import com.inuker.bluetooth.library.connect.listener.BleConnectStatusListener;
+import com.inuker.bluetooth.library.connect.options.BleConnectOptions;
+import com.inuker.bluetooth.library.connect.response.BleConnectResponse;
+import com.inuker.bluetooth.library.model.BleGattCharacter;
+import com.inuker.bluetooth.library.model.BleGattProfile;
+import com.inuker.bluetooth.library.model.BleGattService;
 import com.inuker.bluetooth.library.search.SearchRequest;
 import com.inuker.bluetooth.library.search.SearchResult;
 import com.inuker.bluetooth.library.search.response.SearchResponse;
 import com.inuker.bluetooth.library.utils.BluetoothLog;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+import pub.devrel.easypermissions.PermissionRequest;
+
+import static com.inuker.bluetooth.library.Code.REQUEST_SUCCESS;
+import static com.inuker.bluetooth.library.Constants.STATUS_CONNECTED;
+import static com.inuker.bluetooth.library.Constants.STATUS_DISCONNECTED;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -29,6 +43,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BlueToothRecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
     private ArrayList<SearchResult> searchResults;
+
+    private final BleConnectStatusListener mBleConnectStatusListener = new BleConnectStatusListener() {
+        @Override
+        public void onConnectStatusChanged(String macAddress, int status) {
+
+            if (status == STATUS_CONNECTED) {
+                //蓝牙设备处于连接状态
+            } else if (status == STATUS_DISCONNECTED) {
+                //蓝牙设备断开
+            }
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btCloseBluetooth.setOnClickListener(this);
         btSearchBluetooth.setOnClickListener(this);
         btStopSearch.setOnClickListener(this);
+        String[] perms={Manifest.permission.ACCESS_COARSE_LOCATION};
+        EasyPermissions.requestPermissions(
+                new PermissionRequest.Builder(this, 1, perms)
+                        .build());
+
+//蓝牙的状态监听
+        MyApplication.getClient().registerConnectStatusListener(adapter.searchResult.getAddress(), mBleConnectStatusListener);
     }
 
     public void init() {
@@ -80,13 +114,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_search_stop:
                 bluetoothClient.stopSearch();
+
                 break;
 
 
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
     public void searchBluetooth() {
 
         SearchRequest request = new SearchRequest.Builder()
@@ -103,14 +144,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             public void onDeviceFounded(SearchResult device) {//找到设备可通过manufacture过滤
                 Beacon beacon = new Beacon(device.scanRecord);
-                int i=0;
-                for (SearchResult s:searchResults){
-                    if (s.getAddress().equals(device.getAddress())){
-                        i=1;
-                        break;
-                    }
-                }
-                if (i==0)
+//                int i=0;
+//                for (SearchResult s:searchResults){
+//                    if (s.getAddress().equals(device.getAddress())){
+//                        i=1;
+//                        break;
+//                    }
+//                }
+//                if (i==0)
+                if (!searchResults.contains(device))
                 searchResults.add(device);
                 adapter.notifyDataSetChanged();
                 BluetoothLog.v(String.format("beacon for %s\n%s", device.getAddress(), beacon.toString()));
@@ -130,4 +172,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         });
     }
+
+
+
+
 }
