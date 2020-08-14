@@ -5,11 +5,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * create by li
@@ -82,6 +80,7 @@ public class BluetoothController {
      * @return
      */
     public List<BluetoothDevice> getBondedDeviceList(){
-        return new ArrayList<>(adapter.getBondedDevices());
+        Set<BluetoothDevice> bondedDevices = adapter.getBondedDevices();
+        return new ArrayList<>(bondedDevices);
     }
 }

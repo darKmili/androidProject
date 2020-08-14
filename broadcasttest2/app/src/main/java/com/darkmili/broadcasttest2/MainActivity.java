@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     adapter_unlink.notifyDataSetChanged();
                     break;
                 case ACTION_DISCOVERY_STARTED:
-                    progressBar.setVisibility(View.VISIBLE);
                     list_unlink.clear();
                     adapter_unlink.notifyDataSetChanged();
                     break;
@@ -164,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         re_unlink = findViewById(R.id.re_unlink);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
-        list_linked=new ArrayList<>();
+        list_linked=controller.getBondedDeviceList();
         adapter_linked = new BlueToothRecyclerViewAdapter((ArrayList<BluetoothDevice>) list_linked,this);
         list_unlink = new ArrayList<>();
         adapter_unlink = new BlueToothRecyclerViewAdapter((ArrayList<BluetoothDevice>) list_unlink,this);

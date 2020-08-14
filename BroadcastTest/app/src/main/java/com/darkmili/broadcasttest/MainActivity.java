@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private MyReceiver myReceiver;
-    final int MY_BROADCAST = 1;
+//    final int MY_BROADCAST = 1;
     private LocalBroadcastManager localBroadcastManager ;
 
 
@@ -26,14 +26,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
        localBroadcastManager = LocalBroadcastManager.getInstance(this);
        myReceiver=new MyReceiver();
+
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent("com.darkmili.broadcasttest.MY_BROADCAST");
 //                sendBroadcast(intent);
+                //设置发送到的程序包名，隐式变显示
+                intent.setPackage(getPackageName());
                 localBroadcastManager.sendBroadcast(intent);
             }
         });

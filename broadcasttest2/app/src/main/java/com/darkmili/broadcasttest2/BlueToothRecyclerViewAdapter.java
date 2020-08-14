@@ -3,19 +3,14 @@ package com.darkmili.broadcasttest2;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueToothRecyclerViewAdapter.ViewHolder> {
@@ -24,7 +19,7 @@ public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueTooth
 
     public BlueToothRecyclerViewAdapter(ArrayList<BluetoothDevice> list, Context context) {
         this.list = list;
-        this.context=context;
+        this.context = context;
     }
 
     @NonNull
@@ -39,14 +34,11 @@ public class BlueToothRecyclerViewAdapter extends RecyclerView.Adapter<BlueTooth
                 BluetoothDevice device = list.get(position);
                 //进行绑定
                 boolean bond = device.createBond();
-                if (bond){
-                    Bundle bundle=new Bundle();
-                    bundle.putParcelable("device",device);
-                    Intent intent = new Intent(context, ChatActivity.class);
-                    intent.putExtra("device",bundle);
-                    context.startActivity(intent);
-                }
-                Toast.makeText(parent.getContext(),device.getName(),Toast.LENGTH_SHORT).show();
+                //携带通信地址,跳转到通信页面
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("device", device.getAddress());
+                context.startActivity(intent);
+                Toast.makeText(parent.getContext(), device.getName(), Toast.LENGTH_SHORT).show();
             }
         });
         return viewHolder;

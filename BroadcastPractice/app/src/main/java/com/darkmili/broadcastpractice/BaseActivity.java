@@ -20,12 +20,13 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityCollecter.addActivity(this);
-
-
+        //将活动保存到活动收集器里面
+        ActivityCollecter.getInstance().addActivity(this);
     }
 
-
+    /**
+     * 为啥在运行时才注册广播？因为我们必须保证活动在栈顶才可以接受这条广播，而如果处于非栈顶状态不应该也没有必要接受广播。当活动失去栈顶时，就取消接受。
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -35,6 +36,9 @@ public class BaseActivity extends AppCompatActivity {
         localBroadcastManager.registerReceiver(myReceiver, intentFilter);
     }
 
+    /**
+     * 为啥在暂停时取消广播？
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -47,27 +51,23 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityCollecter.removeActivity(this);
+        ActivityCollecter.getInstance().removeActivity(this);
 
     }
 
-    public
-
-
-     class MyReceiver extends BroadcastReceiver {
+    public class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, final Intent intent) {
-            AlertDialog.Builder builder=new AlertDialog.Builder(BaseActivity.this);
-            builder.setMessage("强制下线");
-            builder.setTitle("warning");
-            builder.setCancelable(false);
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    ActivityCollecter.finishAll();
-                    LoginActivity.startLoginActivity(BaseActivity.this);
-                }
-            });
+            AlertDialog.Builder builder=new AlertDialog.Builder(BaseActivity.this).setMessage("账号异常，强制下线")
+                    .setCancelable(false)
+                    .setTitle("警告")
+                    .setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ActivityCollecter.getInstance().finishAll();
+                            LoginActivity.startLoginActivity(BaseActivity.this);
+                        }
+                    });
             builder.show();
         }
     }

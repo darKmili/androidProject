@@ -6,4 +6,5 @@
     <string name="close_bluetooth">关闭蓝牙</string>
     <string name="can_see">打开可见</string>
     <string name="see_linked">查看配对设备</string>
+    <string name="title">名称</string>
 </resources>

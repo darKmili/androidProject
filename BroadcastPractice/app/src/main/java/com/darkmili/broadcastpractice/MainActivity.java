@@ -22,6 +22,7 @@ public  class MainActivity extends BaseActivity {
             public void onClick(View view) {
                //发送本地广播
                 Intent intent = new Intent("com.darkmili.broadcastpractice.MY_BROADCAST");
+                intent.setPackage(getPackageName());
                 localBroadcastManager.sendBroadcast(intent);
             }
         });
