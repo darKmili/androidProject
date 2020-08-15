@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:gravity="end|bottom"
             android:hint="0"
+            android:textColor="#ff090000"
             android:textSize="40sp" />
     </LinearLayout>
 
@@ -91,8 +92,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/bt_selector"
-                android:text="/"
                 android:onClick="divide"
+                android:text="/"
                 android:textColor="#C16446"
                 android:textSize="30sp" />
 
@@ -270,8 +271,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/bt_selector"
+                android:onClick="getDot"
                 android:text="."
-
                 android:textColor="#C16446"
                 android:textSize="30sp" />
 
@@ -281,8 +282,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/bt_selector"
+                android:onClick="getEquals"
                 android:text="="
-
                 android:textColor="#C16446"
                 android:textSize="30sp" />
 

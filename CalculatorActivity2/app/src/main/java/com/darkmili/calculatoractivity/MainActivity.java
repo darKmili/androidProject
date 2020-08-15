@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,11 +17,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, btnDot, btnAdd, btnMinus, btnMulti, btnDvs, btnEq, clear, delete;
     private TextView textView1, text_result;
-    private MutableLiveData<String> result,display;
-    private StringBuilder resultBuilder;
+    private MutableLiveData<String> result, display;
+    private StringBuilder allBuilder;
     private StringBuilder tmpBuilder;
     private MainViewModel viewModel;
-
+    private Calculate calculate;
     public static final String ADD = "add";
     public static final String MIN = "min";
     public static final String MUL = "mul";
@@ -61,23 +60,26 @@ public class MainActivity extends AppCompatActivity {
         textView1 = findViewById(R.id.text_1);
         text_result = findViewById(R.id.text_result);
         tmpBuilder = new StringBuilder();
+        allBuilder = new StringBuilder();
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        display=viewModel.getDisplay();
+        display = viewModel.getDisplay();
         result = viewModel.getResult();
-        result.observe(this, new Observer<String>() {
+
+        calculate = new Calculate(this);
+        display.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 if (s == null) {
                     s = "";
                 }
-                textView1.setText("=" + s);
+                textView1.setText(s);
             }
         });
-        display.observe(this, new Observer<String>() {
+        result.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                if (s==null){
-                    s="";
+                if (s == null) {
+                    s = "";
                 }
                 text_result.setText(s);
             }
@@ -90,15 +92,14 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void get0(View view) {
-        if (tmpBuilder.length() == 0) {
+        if (allBuilder.length() == 0) {
             return;
         } else {
             tmpBuilder.append(0);
-            resultBuilder.append(0);
-            result.setValue(resultBuilder.toString());
-            if (!isHaveSign(resultBuilder.toString())){
-                display.setValue(tmpBuilder.toString());
-            }
+            allBuilder.append(0);
+            display.setValue(allBuilder.toString());
+            tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+            result.setValue(tmpBuilder.toString());
         }
     }
 
@@ -109,11 +110,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get1(View view) {
         tmpBuilder.append(1);
-        resultBuilder.append(1);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(1);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
@@ -123,11 +123,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get2(View view) {
         tmpBuilder.append(2);
-        resultBuilder.append(2);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(2);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
@@ -137,11 +136,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get3(View view) {
         tmpBuilder.append(3);
-        resultBuilder.append(3);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(3);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
@@ -151,11 +149,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get4(View view) {
         tmpBuilder.append(4);
-        resultBuilder.append(4);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(4);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
@@ -165,11 +162,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get5(View view) {
         tmpBuilder.append(5);
-        resultBuilder.append(5);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(5);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
@@ -179,11 +175,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get6(View view) {
         tmpBuilder.append(6);
-        resultBuilder.append(6);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(6);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
@@ -193,11 +188,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get7(View view) {
         tmpBuilder.append(7);
-        resultBuilder.append(7);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(7);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
@@ -207,12 +201,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get8(View view) {
         tmpBuilder.append(8);
-        resultBuilder.append(8);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            //短
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(8);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
@@ -222,13 +214,29 @@ public class MainActivity extends AppCompatActivity {
      */
     public void get9(View view) {
         tmpBuilder.append(9);
-        resultBuilder.append(9);
-        result.setValue(resultBuilder.toString());
-        if (!isHaveSign(resultBuilder.toString())){
-            display.setValue(tmpBuilder.toString());
-        }
+        allBuilder.append(9);
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
+    /**
+     * 获得小数点
+     * @param view
+     */
+    public void getDot(View view){
+        tmpBuilder.append(".");
+        allBuilder.append(".");
+        display.setValue(allBuilder.toString());
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
+    }
+
+    public void getEquals(View view){
+        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
+        allBuilder=tmpBuilder;
+    }
     /**
      * 清除所有数据
      *
@@ -236,8 +244,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public void clear(View view) {
         tmpBuilder = new StringBuilder();
-        resultBuilder=new StringBuilder();
+        allBuilder = new StringBuilder();
         result.setValue("");
+        display.setValue("");
     }
 
     /**
@@ -247,12 +256,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void delete(View view) {
         try {
-            tmpBuilder.deleteCharAt(tmpBuilder.length() - 1);
-            resultBuilder.deleteCharAt(resultBuilder.length()-1);
-            result.setValue(resultBuilder.toString());
-            if (!isHaveSign(resultBuilder.toString())){
-                //TODO
-            }
+            allBuilder.deleteCharAt(allBuilder.length() - 1);
+            tmpBuilder=new StringBuilder(calculate.calculate(allBuilder.toString()));
+            result.setValue(tmpBuilder.toString());
+            display.setValue(allBuilder.toString());
         } catch (Exception e) {
             Log.e("error", "删除错误");
         }
@@ -264,35 +271,52 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void add(View view) {
-        resultBuilder.append("+");
-        result.setValue(resultBuilder.toString());
-        list.add(new Item(tmpBuilder.toString(),ADD));
-        tmpBuilder=new StringBuilder();
-        display.setValue(tmpBuilder.toString());
+        if (lastIsSign(allBuilder.toString())) {
+            allBuilder.deleteCharAt(allBuilder.length() - 1).append("+");
+
+        } else {
+            allBuilder.append("+");
+
+        }
+        display.setValue(allBuilder.toString());
+//        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
-   /**
+
+    /**
      * 减法事件
      *
      * @param view
      */
     public void min(View view) {
-        resultBuilder.append("-");
-        result.setValue(resultBuilder.toString());
-        list.add(new Item(tmpBuilder.toString(),MIN));
-        tmpBuilder=new StringBuilder();
-        display.setValue(tmpBuilder.toString());
+        if (lastIsSign(allBuilder.toString())) {
+            allBuilder.deleteCharAt(allBuilder.length() - 1).append("-");
+
+        } else {
+            allBuilder.append("-");
+
+        }
+        display.setValue(allBuilder.toString());
+//        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
-   /**
+
+    /**
      * 乘法事件
      *
      * @param view
      */
     public void mul(View view) {
-        resultBuilder.append("x");
-        result.setValue(resultBuilder.toString());
-        list.add(new Item(tmpBuilder.toString(),MUL));
-        tmpBuilder=new StringBuilder();
-        display.setValue(tmpBuilder.toString());
+        if (lastIsSign(allBuilder.toString())) {
+            allBuilder.deleteCharAt(allBuilder.length() - 1).append("*");
+        } else {
+            allBuilder.append("*");
+        }
+        display.setValue(allBuilder.toString());
+//        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
+
+
     }
 
     /**
@@ -301,28 +325,49 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void divide(View view) {
-        resultBuilder.append("/");
-        result.setValue(resultBuilder.toString());
-        list.add(new Item(tmpBuilder.toString(),DVS));
-        tmpBuilder=new StringBuilder();
-        display.setValue(tmpBuilder.toString());
+        if (lastIsSign(allBuilder.toString())) {
+            allBuilder.deleteCharAt(allBuilder.length() - 1).append("/");
+
+        } else {
+            allBuilder.append("/");
+
+        }
+        display.setValue(allBuilder.toString());
+//        tmpBuilder = new StringBuilder(calculate.calculate(allBuilder.toString()));
+        result.setValue(tmpBuilder.toString());
     }
 
     /**
      * 判断是否含有符号
+     *
      * @param s
      * @return
      */
-    public boolean isHaveSign(String s){
-        if (s.contains("/")){
+    public boolean isHaveSign(String s) {
+        if (s.contains("/")) {
             return true;
-        }else if (s.contains("x")){
+        } else if (s.contains("*")) {
             return true;
-        }else if (s.contains("+")){
+        } else if (s.contains("+")) {
             return true;
-        }else if (s.contains("-")){
+        } else if (s.contains("-")) {
             return true;
         }
         return false;
     }
+
+    /**
+     * 判断最后一个值是否为符号
+     *
+     * @param s
+     * @return
+     */
+    public boolean lastIsSign(String s) {
+        if (s.endsWith("*") || s.endsWith("/") || s.endsWith("+") || s.endsWith("-")) {
+            return true;
+        }
+        return false;
+    }
+
+
 }
