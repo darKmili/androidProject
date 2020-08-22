@@ -1,4 +1,4 @@
-package com.darkmili.ecxkdemo;
+package com.darkmili.ecxkdemo.feature.dialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -11,10 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.data.CellInfo;
 import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.format.bg.BaseBackgroundFormat;
 import com.bin.david.form.data.format.bg.IBackgroundFormat;
 import com.bin.david.form.data.style.FontStyle;
 import com.bin.david.form.data.table.TableData;
+import com.darkmili.ecxkdemo.R;
 import com.darkmili.ecxkdemo.entity.UserInfo;
 
 import java.util.ArrayList;
@@ -40,7 +43,9 @@ public class DialogActivity extends AppCompatActivity {
         table = findViewById(R.id.smart_excel);
         table.setTableData(tableData);
         table.getConfig().setColumnTitleStyle(new FontStyle(50,Color.GREEN));
-        table.getConfig().setContentStyle(new FontStyle(50, Color.BLUE));
+        table.getConfig().setContentStyle(new FontStyle(50, Color.BLACK));
+        table.getConfig().setContentBackground(new BaseBackgroundFormat(Color.GRAY));
+
     }
 
 }

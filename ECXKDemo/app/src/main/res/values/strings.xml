@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">无线传输</string>
+    <string name="app_name">动物管家</string>
     <string name="bluetooth">&#xe633;</string>
+    <string name="tobottom">&#xe602;</string>
 </resources>

@@ -65,12 +65,13 @@ public class BlueToothControl {
     }
 
     /**
-     * 是否可用
+     * 是否打开
      * @return
      */
     public boolean isEnable(){
        return mAdapter.isEnabled();
     }
+
 
 
     /**

@@ -1,4 +1,4 @@
-package com.darkmili.ecxkdemo;
+package com.darkmili.ecxkdemo.feature.main;
 
 import android.content.Context;
 import android.util.AttributeSet;

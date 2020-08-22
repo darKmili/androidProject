@@ -18,10 +18,14 @@ import java.util.List;
 public class BluetoothListAdapter extends ArrayAdapter<BluetoothDevice> {
 
     private int resourceId;
+    private List<BluetoothDevice> mData;
+    private Context mContext;
 
     public BluetoothListAdapter(@NonNull Context context, int resource, @NonNull List<BluetoothDevice> objects) {
         super(context, resource, objects);
         resourceId = resource;
+        mContext = context.getApplicationContext();
+        mData=objects;
     }
 
     @NonNull
@@ -31,30 +35,47 @@ public class BluetoothListAdapter extends ArrayAdapter<BluetoothDevice> {
 
         View view;
         ViewHolder viewHolder;
-        if (convertView!=null){
-            view=convertView;
-            viewHolder=(ViewHolder) view.getTag();
+        if (convertView != null) {
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag();
 
-        }else {
-            view= LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
-            viewHolder=new ViewHolder();
-            viewHolder.name =view.findViewById(R.id.text_bluetooth_name);
-            viewHolder.mac=view.findViewById(R.id.text_bluetooth_mac);
+        } else {
+            view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.name = view.findViewById(R.id.text_bluetooth_name);
+            viewHolder.mac = view.findViewById(R.id.text_bluetooth_mac);
             view.setTag(viewHolder);
         }
-        if (viewHolder!=null) {
+        if (viewHolder != null) {
             viewHolder.name.setText(device.getName());
             viewHolder.mac.setText(device.getAddress());
         }
         return view;
     }
-    private class ViewHolder{
-       public TextView name;
-       public TextView mac;
+
+    private class ViewHolder {
+        public TextView name;
+        public TextView mac;
     }
 
     @Override
     public int getCount() {
-        return super.getCount();
+        return mData.size();
+    }
+
+    @Override
+    public BluetoothDevice getItem(int i) {
+        return mData.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    //刷新列表，防止搜索结果重复出现
+    public void refresh(List<BluetoothDevice> data) {
+        mData = data;
+        notifyDataSetChanged();
     }
 }

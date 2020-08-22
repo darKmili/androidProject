@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/item_xiaoxi"
-        android:icon="@drawable/ic_xiaoxi"
+        android:id="@+id/item_xinxi"
+        android:icon="@drawable/ic_zhu"
         app:showAsAction="ifRoom"
-        android:title="传输" />
+        android:title="猪只信息" />
     <item
-        android:id="@+id/item_xiaongxi"
+        android:id="@+id/item_xiangxi"
         android:icon="@drawable/ic_xiangxi"
         app:showAsAction="ifRoom"
-        android:title="数据记录" />
+        android:title="数据档案" />
     <item
         android:id="@+id/item_zhuye"
-        android:icon="@drawable/ic_zhuye"
+        android:icon="@drawable/ic_chanpinjieshao"
         app:showAsAction="ifRoom"
-        android:title="主页" />
+        android:title="产品介绍" />
 
 
 </menu>
