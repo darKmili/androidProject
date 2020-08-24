@@ -73,6 +73,18 @@ public class BluetoothListAdapter extends ArrayAdapter<BluetoothDevice> {
         return i;
     }
 
+    @Override
+    public void remove(@Nullable BluetoothDevice object) {
+        mData.remove(object);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void add(@Nullable BluetoothDevice object) {
+        mData.add(object);
+        notifyDataSetChanged();
+    }
+
     //刷新列表，防止搜索结果重复出现
     public void refresh(List<BluetoothDevice> data) {
         mData = data;

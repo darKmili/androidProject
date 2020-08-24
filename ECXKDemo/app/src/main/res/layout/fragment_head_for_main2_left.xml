@@ -46,10 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="left"
-        app:constraint_referenced_ids="text1,text2,text3" />
+        app:constraint_referenced_ids="text_time,text2,text3" />
 
     <TextView
-        android:id="@+id/text1"
+        android:id="@+id/text_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="64dp"
@@ -71,7 +71,7 @@
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toRightOf="@id/image"
         app:layout_constraintBottom_toTopOf="@id/text3"
-        app:layout_constraintTop_toBottomOf="@id/text1"/>
+        app:layout_constraintTop_toBottomOf="@id/text_time"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,9 +88,9 @@
         android:id="@+id/edit1"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/text1"
-        app:layout_constraintTop_toTopOf="@id/text1"
-        app:layout_constraintBaseline_toBaselineOf="@id/text1"
+        app:layout_constraintLeft_toRightOf="@id/text_time"
+        app:layout_constraintTop_toTopOf="@id/text_time"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_time"
         android:text="H23"
         android:layout_marginStart="16dp"/>
 

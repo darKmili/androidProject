@@ -3,6 +3,7 @@ package com.darkmili.ecxkdemo.feature.dialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -31,6 +32,8 @@ public class DialogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
+        Intent intent = getIntent();
+        String time = intent.getStringExtra("time");
         List<UserInfo> list = new ArrayList<>();
         Column<String> name=new Column<String>("名称","name");
         Column<String> data=new Column<String>("时间","date");
@@ -38,13 +41,13 @@ public class DialogActivity extends AppCompatActivity {
         list.add(new UserInfo("nai","ddasd"));
         list.add(new UserInfo("ndi","ddasd"));
         list.add(new UserInfo("dani","ddaasd"));
-        TableData<UserInfo> tableData=new TableData<UserInfo>("表名",list,name,data);
-
+        TableData<UserInfo> tableData=new TableData<UserInfo>("时间"+time,list,name,data);
         table = findViewById(R.id.smart_excel);
         table.setTableData(tableData);
         table.getConfig().setColumnTitleStyle(new FontStyle(50,Color.GREEN));
         table.getConfig().setContentStyle(new FontStyle(50, Color.BLACK));
         table.getConfig().setContentBackground(new BaseBackgroundFormat(Color.GRAY));
+
 
     }
 

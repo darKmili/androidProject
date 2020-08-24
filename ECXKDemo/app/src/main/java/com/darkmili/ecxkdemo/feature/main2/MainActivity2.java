@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.darkmili.ecxkdemo.R;
 import com.darkmili.ecxkdemo.feature.BaseActivity;
+import com.darkmili.ecxkdemo.feature.main.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity2 extends BaseActivity {
@@ -55,6 +57,7 @@ public class MainActivity2 extends BaseActivity {
                     case R.id.item_xinxi:
                         fragment = new FragmentLeft();
                         replaceFragment(fragment);
+
                         break;
                     case R.id.item_xiangxi:
                         fragment = new FragmentMiddle();
@@ -78,6 +81,18 @@ public class MainActivity2 extends BaseActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+
+        }
+        return true;
+    }
+
     /**
      * 　　* @description: 动态加载碎片
      * 　　* @param ${tags}
@@ -89,7 +104,6 @@ public class MainActivity2 extends BaseActivity {
      */
     private void replaceFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
-
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fragment_layout, fragment);
         //替换完成后必须提交

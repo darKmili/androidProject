@@ -31,12 +31,14 @@
         </activity>
         <activity
             android:name=".feature.dialog.DialogActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog.Alert" />
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog.Alert"
+            android:label=""/>
 
 
         <activity
             android:name=".feature.main.MainActivity"
-            android:label=""></activity>
+            android:label="">
+        </activity>
     </application>
 
 </manifest>

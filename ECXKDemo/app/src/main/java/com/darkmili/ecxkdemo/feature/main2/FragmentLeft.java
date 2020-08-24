@@ -15,7 +15,7 @@ import com.darkmili.ecxkdemo.R;
  * @author Administrator
  * @title: FragmentLeft
  * @projectName ECXKDemo
- * @description: 用于当前蓝牙数据传输的界面交互
+ * @description: 用于显示当前猪猪的数据信息
  * @date 2020/8/19 9:37
  */
 public class FragmentLeft extends Fragment {

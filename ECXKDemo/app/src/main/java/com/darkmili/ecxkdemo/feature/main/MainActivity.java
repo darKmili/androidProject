@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.darkmili.ecxkdemo.feature.BaseActivity;
 import com.darkmili.ecxkdemo.feature.dialog.DialogActivity;
@@ -25,9 +26,13 @@ import com.darkmili.ecxkdemo.R;
 import com.darkmili.ecxkdemo.adapter.BluetoothListAdapter;
 import com.darkmili.ecxkdemo.controll.BlueToothControl;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class MainActivity extends BaseActivity {
 
@@ -85,16 +90,18 @@ public class MainActivity extends BaseActivity {
 //                    showToast("无设备");
 //                    return;
 //                }
-//                int status = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, 0);
-//                if (status == BluetoothDevice.BOND_BONDED) {
+                int status = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, 0);
+                if (status == BluetoothDevice.BOND_BONDED) {
+                    BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 //                    showToast("已绑定" + remoteDevice.getName());
-//                } else if (status == BluetoothDevice.BOND_BONDING) {
+                    bluetoothDevices_peidui.add(remoteDevice);
+                } else if (status == BluetoothDevice.BOND_BONDING) {
 //                    showToast("正在绑定" + remoteDevice.getName());
-//                } else if (status == BluetoothDevice.BOND_NONE) {
+                } else if (status == BluetoothDevice.BOND_NONE) {
 //                    showToast("未绑定" + remoteDevice.getName());
-//                }
-//            }
-        }
+                }
+            }
+
     };
 
     @Override
@@ -105,23 +112,48 @@ public class MainActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                BluetoothDevice device = bluetoothDevices.get(i);
+
+                final BluetoothDevice device = bluetoothDevices.get(i);
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                     device.createBond();
                 }
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                intent.putExtra("position", device.getAddress());
-                startActivity(intent);
+                if (device.getBondState()==BluetoothDevice.BOND_BONDING){
+                    listAdapter_peidui.add(device);
+                }
+            Toast.makeText(MainActivity.this,"正在请求配对.......", LENGTH_LONG).show();
+
+            }
+        });
+        listView_peidui.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                Snackbar.make(view,"解除配对",Snackbar.LENGTH_LONG).setAction("解除", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        BluetoothDevice device = bluetoothDevices.get(i);
+                        listAdapter_peidui.remove(device);
+                        control.unpairDevice(device);
+                    }
+                }).show();
+
+                return true;
             }
         });
 
         listView_peidui.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this, "长按可以解除配对", Toast.LENGTH_SHORT).show();
                 BluetoothDevice device = bluetoothDevices_peidui.get(i);
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                intent.putExtra("position", device.getAddress());
-                startActivity(intent);
+                if (device.getBondState()==BluetoothDevice.BOND_BONDED){
+                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                    intent.putExtra("position", device.getAddress());
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(MainActivity.this, "未配对", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
         //注册广播
@@ -219,10 +251,10 @@ public class MainActivity extends BaseActivity {
         if (!control.isEnable()) {
             control.turnOnBlueTooth(this, 1);
         }
-
-        if (bluetoothDevices_peidui == null || bluetoothDevices_peidui.size() == 0) {
+        if (true) {
             bluetoothDevices_peidui = control.getBondedDeviceList();
             listAdapter_peidui.addAll(bluetoothDevices_peidui);
+//            listAdapter_peidui.notifyDataSetChanged();
         }
         listAdapter.refresh(bluetoothDevices);
         control.findDevice();

@@ -2,4 +2,11 @@
     <string name="app_name">动物管家</string>
     <string name="bluetooth">&#xe633;</string>
     <string name="tobottom">&#xe602;</string>
+
+    <string-array name="health_type">
+        <item>优</item>
+        <item>良</item>
+        <item>及格</item>
+        <item>差</item>
+    </string-array>
 </resources>

@@ -81,7 +81,7 @@ public class BlueToothControl {
     public void unpairDevice(BluetoothDevice device) {
         try {
             Method m = device.getClass().getMethod("removeBond", (Class[]) null);
-            m.setAccessible(true);
+//            m.setAccessible(true);
             m.invoke(device, (Object[]) null);
         } catch (Exception e) {
             Log.e("ble",e.toString());

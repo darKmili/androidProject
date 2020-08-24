@@ -4,8 +4,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/excel"
-            android:title="图表"
-            android:icon="@drawable/ic_excel_01"
+            android:title="帮助"
+            android:icon="@drawable/ic_help"
             app:showAsAction="ifRoom" />
         <item
             android:id="@+id/share"
