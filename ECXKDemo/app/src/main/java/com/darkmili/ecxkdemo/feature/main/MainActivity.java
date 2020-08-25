@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+//            int status = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, 0);
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                 //setProgressBarIndeterminateVisibility(true);
                 findProgressBar.setVisibility(View.VISIBLE);
@@ -71,36 +72,34 @@ public class MainActivity extends BaseActivity {
                 listAdapter.notifyDataSetChanged();
 
             }
-//            //扫描模式改变
-//            if (BluetoothAdapter.ACTION_SCAN_MODE_CHANGED.equals(action)) {  //此处作用待细查
-//                int scanMode = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, 0);
-//                if (scanMode == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-//                    //当在可见性时间，则开启进度条
-//                    //setProgressBarIndeterminateVisibility(true);
+            //扫描模式改变
+            if (BluetoothAdapter.ACTION_SCAN_MODE_CHANGED.equals(action)) {  //此处作用待细查
+                int scanMode = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, 0);
+                if (scanMode == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+                    //当在可见性时间，则开启进度条
+                    //setProgressBarIndeterminateVisibility(true);
 //                    progressBar.setVisibility(View.VISIBLE);
-//                } else {
-//                    //当可见性时间到了，则关闭进度条
-//                    //setProgressBarIndeterminateVisibility(false);
+                } else {
+                    //当可见性时间到了，则关闭进度条
+                    //setProgressBarIndeterminateVisibility(false);
 //                    progressBar.setVisibility(View.INVISIBLE);
-//                }
-//                //绑定状态改变
-//            } else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
-//                BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-//                if (remoteDevice == null) {
-//                    showToast("无设备");
-//                    return;
-//                }
-                int status = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, 0);
+                }
+                //绑定状态改变
+            } else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
+                BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                int status = remoteDevice.getBondState();
                 if (status == BluetoothDevice.BOND_BONDED) {
-                    BluetoothDevice remoteDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    if (!bluetoothDevices_peidui.contains(remoteDevice)) {
 //                    showToast("已绑定" + remoteDevice.getName());
-                    bluetoothDevices_peidui.add(remoteDevice);
+                        listAdapter_peidui.add(remoteDevice);
+                    }
                 } else if (status == BluetoothDevice.BOND_BONDING) {
 //                    showToast("正在绑定" + remoteDevice.getName());
                 } else if (status == BluetoothDevice.BOND_NONE) {
 //                    showToast("未绑定" + remoteDevice.getName());
                 }
             }
+        }
 
     };
 
@@ -117,20 +116,20 @@ public class MainActivity extends BaseActivity {
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                     device.createBond();
                 }
-                if (device.getBondState()==BluetoothDevice.BOND_BONDING){
+                if (device.getBondState() == BluetoothDevice.BOND_BONDING) {
                     listAdapter_peidui.add(device);
                 }
-            Toast.makeText(MainActivity.this,"正在请求配对.......", LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "正在请求配对,请耐心等待.......", LENGTH_LONG).show();
 
             }
         });
         listView_peidui.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                Snackbar.make(view,"解除配对",Snackbar.LENGTH_LONG).setAction("解除", new View.OnClickListener() {
+                Snackbar.make(view, "解除配对", Snackbar.LENGTH_LONG).setAction("解除", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        BluetoothDevice device = bluetoothDevices.get(i);
+                        BluetoothDevice device = bluetoothDevices_peidui.get(i);
                         listAdapter_peidui.remove(device);
                         control.unpairDevice(device);
                     }
@@ -145,11 +144,11 @@ public class MainActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(MainActivity.this, "长按可以解除配对", Toast.LENGTH_SHORT).show();
                 BluetoothDevice device = bluetoothDevices_peidui.get(i);
-                if (device.getBondState()==BluetoothDevice.BOND_BONDED){
+                if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     intent.putExtra("position", device.getAddress());
                     startActivity(intent);
-                }else {
+                } else {
                     Toast.makeText(MainActivity.this, "未配对", Toast.LENGTH_SHORT).show();
 
                 }
@@ -251,15 +250,16 @@ public class MainActivity extends BaseActivity {
         if (!control.isEnable()) {
             control.turnOnBlueTooth(this, 1);
         }
-        if (true) {
-            bluetoothDevices_peidui = control.getBondedDeviceList();
-            listAdapter_peidui.addAll(bluetoothDevices_peidui);
-//            listAdapter_peidui.notifyDataSetChanged();
-        }
+
+        bluetoothDevices_peidui = control.getBondedDeviceList();
+        listAdapter_peidui.addAll(bluetoothDevices_peidui);
         listAdapter.refresh(bluetoothDevices);
         control.findDevice();
-//        control.findDevice();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
 }

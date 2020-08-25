@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.darkmili.ecxkdemo.R;
 import com.darkmili.ecxkdemo.feature.BaseActivity;
 import com.darkmili.ecxkdemo.feature.main.MainActivity;
+import com.darkmili.ecxkdemo.repository.local.dao.AnimalDao;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity2 extends BaseActivity {
@@ -26,6 +27,8 @@ public class MainActivity2 extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        //测试
+        AnimalDao.insert();
         initUI();
 
 

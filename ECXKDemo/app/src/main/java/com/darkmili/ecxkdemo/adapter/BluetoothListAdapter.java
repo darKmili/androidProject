@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 
 import com.darkmili.ecxkdemo.R;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class BluetoothListAdapter extends ArrayAdapter<BluetoothDevice> {
@@ -90,4 +92,13 @@ public class BluetoothListAdapter extends ArrayAdapter<BluetoothDevice> {
         mData = data;
         notifyDataSetChanged();
     }
+
+    @Override
+    public void addAll(@NonNull Collection<? extends BluetoothDevice> collection) {
+        mData.clear();
+        mData.addAll(collection);
+        notifyDataSetChanged();
+    }
+
+
 }

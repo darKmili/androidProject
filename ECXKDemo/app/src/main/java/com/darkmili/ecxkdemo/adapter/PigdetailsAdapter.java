@@ -64,9 +64,7 @@ public class PigdetailsAdapter extends RecyclerView.Adapter<PigdetailsAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         String s = timeList.get(position);
         holder.textView.setText(s);
-        if (position%2==0){
-            holder.view.setBackgroundColor(context.getResources().getColor(android.R.color.darker_gray));
-        }
+
 
     }
 
