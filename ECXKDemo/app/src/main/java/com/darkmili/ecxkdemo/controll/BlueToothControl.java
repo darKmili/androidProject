@@ -78,13 +78,15 @@ public class BlueToothControl {
      *  通过反射来调用BluetoothDevice.removeBond取消设备的配对
      * @param device
      */
-    public void unpairDevice(BluetoothDevice device) {
+    public boolean unpairDevice(BluetoothDevice device) {
         try {
             Method m = device.getClass().getMethod("removeBond", (Class[]) null);
 //            m.setAccessible(true);
             m.invoke(device, (Object[]) null);
+            return true;
         } catch (Exception e) {
             Log.e("ble",e.toString());
         }
+        return false;
     }
 }

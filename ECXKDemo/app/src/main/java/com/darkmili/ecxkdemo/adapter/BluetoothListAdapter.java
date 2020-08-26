@@ -2,6 +2,7 @@ package com.darkmili.ecxkdemo.adapter;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class BluetoothListAdapter extends ArrayAdapter<BluetoothDevice> {
         super(context, resource, objects);
         resourceId = resource;
         mContext = context.getApplicationContext();
-        mData=objects;
+        mData = objects;
     }
 
     @NonNull
@@ -83,13 +84,29 @@ public class BluetoothListAdapter extends ArrayAdapter<BluetoothDevice> {
 
     @Override
     public void add(@Nullable BluetoothDevice object) {
-        mData.add(object);
+        if (!mData.contains(object)) {
+            mData.add(object);
+        }
         notifyDataSetChanged();
     }
 
-    //刷新列表，防止搜索结果重复出现
+    /**
+     * 　　* @description: 刷新列表，防止搜索结果重复出现
+     * 　　* @param ${tags}
+     * 　　* @return ${return_type}
+     * 　　* @throws
+     * 　　* @author dark
+     * 　　* @date 2020/8/26 16:53
+     *
+     */
     public void refresh(List<BluetoothDevice> data) {
         mData = data;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void clear() {
+        mData.clear();
         notifyDataSetChanged();
     }
 
@@ -99,6 +116,5 @@ public class BluetoothListAdapter extends ArrayAdapter<BluetoothDevice> {
         mData.addAll(collection);
         notifyDataSetChanged();
     }
-
 
 }

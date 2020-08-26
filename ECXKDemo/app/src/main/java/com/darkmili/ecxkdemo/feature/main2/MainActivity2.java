@@ -28,7 +28,6 @@ public class MainActivity2 extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         //测试
-        AnimalDao.insert();
         initUI();
 
 
@@ -91,6 +90,7 @@ public class MainActivity2 extends BaseActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 break;
+
 
         }
         return true;

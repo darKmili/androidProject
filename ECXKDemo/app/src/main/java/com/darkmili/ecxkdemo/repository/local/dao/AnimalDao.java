@@ -15,16 +15,16 @@ import java.util.List;
  */
 public class AnimalDao {
 
-    public static Animal findById(String erbiaoID){
-       return (Animal) LitePal.where("erbiaoId = ?",erbiaoID).find(Animal.class);
+    public static List<Animal> findById(String erbiaoID){
+       return  LitePal.where("erbiaoId = ?",erbiaoID).find(Animal.class);
     }
 
     public static List<Animal> findAll(){
         return LitePal.findAll(Animal.class);
     }
-
+    // TODO
     public static void insert(){
-        LitePal.getDatabase();
+//        LitePal.getDatabase();
         Animal animal = new Animal();
         animal.setBianhao("01321");
         animal.setErbiaoId("012345672954321");

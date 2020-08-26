@@ -3,6 +3,8 @@ package com.darkmili.ecxkdemo.feature;
 import android.app.Application;
 import android.content.Context;
 
+import com.darkmili.ecxkdemo.repository.local.dao.AnimalDao;
+
 import org.litepal.LitePal;
 
 /**
@@ -15,6 +17,7 @@ import org.litepal.LitePal;
 public class MyApplication extends Application {
 
     private Context context;
+    private static MyApplication application;
 
 
     @Override
@@ -22,9 +25,17 @@ public class MyApplication extends Application {
         super.onCreate();
         LitePal.initialize(this);
         context=getApplicationContext();
+        AnimalDao.insert();
+        //当打开应用时，对静态的应用实例赋值
+        application=this;
+
     }
 
     public Context getContext() {
         return context;
+    }
+
+    public static MyApplication getInstance(){
+        return application;
     }
 }

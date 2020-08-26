@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 import com.darkmili.ecxkdemo.repository.local.bean.Animal;
 import com.darkmili.ecxkdemo.repository.local.dao.AnimalDao;
 
+import java.util.List;
+
 /**
  * @author Administrator
  * @title: Main2ViewModel
@@ -22,9 +24,9 @@ public class Main2ViewModel extends ViewModel {
     LiveData<Animal> animalLiveData= Transformations.switchMap(erbiaoId, new Function<String, LiveData<Animal>>() {
         @Override
         public LiveData<Animal> apply(String input) {
-            Animal animal = AnimalDao.findById(input);
+            List<Animal> animal = AnimalDao.findById(input);
             MutableLiveData<Animal> animalMutableLiveData = new MutableLiveData<>();
-            animalMutableLiveData.setValue(animal);
+            animalMutableLiveData.setValue(animal.get(0));
             return animalMutableLiveData;
         }
     });
@@ -44,6 +46,6 @@ public class Main2ViewModel extends ViewModel {
     }
 
     public void setErbiaoId(String id) {
-        erbiaoId.setValue(id);
+        erbiaoId.postValue(id);
     }
 }

@@ -12,7 +12,6 @@ import org.litepal.crud.LitePalSupport;
  */
 public class Animal extends LitePalSupport {
 
-    @Column(nullable = false)
     private String erbiaoId;
 
     private float weight;

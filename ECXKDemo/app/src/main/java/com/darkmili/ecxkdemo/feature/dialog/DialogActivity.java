@@ -34,19 +34,43 @@ public class DialogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dialog);
         Intent intent = getIntent();
         String time = intent.getStringExtra("time");
+
+
         List<UserInfo> list = new ArrayList<>();
-        Column<String> name=new Column<String>("名称","name");
-        Column<String> data=new Column<String>("时间","date");
-        list.add(new UserInfo("ni","dasd"));
-        list.add(new UserInfo("nai","ddasd"));
-        list.add(new UserInfo("ndi","ddasd"));
-        list.add(new UserInfo("dani","ddaasd"));
-        TableData<UserInfo> tableData=new TableData<UserInfo>("时间"+time,list,name,data);
+
+
+        Column<String> erbiaoId = new Column<>("耳标号", "erbiaoId");
+        Column<Float> weight = new Column<>("体重", "weight");
+        Column<Integer> growthDays = new Column<Integer>("成长天数", "growthDays");
+        Column<String> species = new Column<String>("种类", "species");
+        Column<String> lanqu = new Column<String>("栏区", "lanqu");
+        Column<String> health = new Column<String>("健康", "health");
+        Column<String> beizhu=new Column<String>("备注","beizhu");
+
+        //TODO  通过viewModel+litepal动态更新列表数据
+
+
+
+
+        list.add(new UserInfo("012345672954321",80,82,"良","猪","h586","猪猪身体健康,刚打过疫苗"));
+        list.add(new UserInfo("012345672954321",100,100,"良","猪","x89","转移到另一个栏区"));
+        list.add(new UserInfo("012345672954321",152,156,"良","猪","x89","猪猪身体健康,可以宰杀"));list.add(new UserInfo("012345672954321",100,100,"良","猪","x89","转移到另一个栏区"));
+        list.add(new UserInfo("012345672954321",152,156,"良","猪","x89","猪猪身体健康,可以宰杀"));list.add(new UserInfo("012345672954321",100,100,"良","猪","x89","转移到另一个栏区"));
+        list.add(new UserInfo("012345672954321",152,156,"良","猪","x89","猪猪身体健康,可以宰杀"));
+        list.add(new UserInfo("012345672954321", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
+        list.add(new UserInfo("012345672954321", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));list.add(new UserInfo("012345672954321", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
+        list.add(new UserInfo("012345672954321", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
+        list.add(new UserInfo("012345672954321", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
+        list.add(new UserInfo("012345672954321", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
+
+
+        TableData<UserInfo> tableData = new TableData<UserInfo>("时间  " + time, list, erbiaoId, weight,growthDays,species,lanqu,health,beizhu);
+
         table = findViewById(R.id.smart_excel);
         table.setTableData(tableData);
-        table.getConfig().setColumnTitleStyle(new FontStyle(50,Color.GREEN));
+        table.getConfig().setColumnTitleStyle(new FontStyle(50, Color.GREEN));
         table.getConfig().setContentStyle(new FontStyle(50, Color.BLACK));
-        table.getConfig().setContentBackground(new BaseBackgroundFormat(Color.GRAY));
+        table.getConfig().setContentBackground(new BaseBackgroundFormat(Color.WHITE));
 
 
     }

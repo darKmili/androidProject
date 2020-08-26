@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/excel"
+            android:id="@+id/help"
             android:title="帮助"
             android:icon="@drawable/ic_help"
             app:showAsAction="ifRoom" />
         <item
-            android:id="@+id/share"
+            android:id="@+id/web"
             android:icon="@drawable/ic_web"
             android:title="官网"
             app:showAsAction="ifRoom" />

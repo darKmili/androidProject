@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,6 +32,8 @@ public class FragmentLeft extends Fragment {
     private EditText editText1,editText2,editText3;
     private TextView weight,tianshu,jiankang;
     private AppCompatActivity activity;
+
+    private Button button;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class FragmentLeft extends Fragment {
     }
 
     public void initView(View view){
+        button=view.findViewById(R.id.button);
         activity=(AppCompatActivity)getActivity();
         erbiaohao=view.findViewById(R.id.txt_erbiaohao);
         editText1=view.findViewById(R.id.edit1);
@@ -80,12 +84,22 @@ public class FragmentLeft extends Fragment {
             update(animal);
             }
         });
-        erbiaohao.setOnClickListener(new View.OnClickListener() {
+
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            viewModel.setErbiaoId("012345672954321");
+                viewModel.setErbiaoId("012345672954321");
+            erbiaohao.setText("012345672954321");
             }
         });
+//        erbiaohao.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            viewModel.setErbiaoId("012345672954321");
+//            erbiaohao.setText("012345672954321");
+//            }
+//        });
     }
 
     public void update(Animal animal){
@@ -93,7 +107,8 @@ public class FragmentLeft extends Fragment {
         editText2.setText(animal.getLanqu());
         editText3.setText(animal.getBianhao());
         weight.setText(String.valueOf(animal.getWeight()));
-        tianshu.setText(animal.getGrowthDays());
+//        tianshu.setText(animal.getGrowthDays());
 //        jiankang.setText(animal.getHealth());
     }
+
 }
