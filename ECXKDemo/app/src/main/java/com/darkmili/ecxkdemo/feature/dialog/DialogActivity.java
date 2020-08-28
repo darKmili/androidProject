@@ -49,9 +49,6 @@ public class DialogActivity extends AppCompatActivity {
 
         //TODO  通过viewModel+litepal动态更新列表数据
 
-
-
-
         list.add(new UserInfo("012345672954321",80,82,"良","猪","h586","猪猪身体健康,刚打过疫苗"));
         list.add(new UserInfo("012345672954321",100,100,"良","猪","x89","转移到另一个栏区"));
         list.add(new UserInfo("012345672954321",152,156,"良","猪","x89","猪猪身体健康,可以宰杀"));list.add(new UserInfo("012345672954321",100,100,"良","猪","x89","转移到另一个栏区"));

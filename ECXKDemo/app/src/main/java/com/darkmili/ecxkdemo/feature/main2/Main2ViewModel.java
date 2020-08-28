@@ -7,7 +7,8 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.darkmili.ecxkdemo.repository.local.bean.Animal;
-import com.darkmili.ecxkdemo.repository.local.dao.AnimalDao;
+
+import org.litepal.LitePal;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Main2ViewModel extends ViewModel {
     LiveData<Animal> animalLiveData= Transformations.switchMap(erbiaoId, new Function<String, LiveData<Animal>>() {
         @Override
         public LiveData<Animal> apply(String input) {
-            List<Animal> animal = AnimalDao.findById(input);
+            List<Animal> animal = LitePal.where("id = ?",erbiaoId.getValue()).find(Animal.class);
             MutableLiveData<Animal> animalMutableLiveData = new MutableLiveData<>();
             animalMutableLiveData.setValue(animal.get(0));
             return animalMutableLiveData;

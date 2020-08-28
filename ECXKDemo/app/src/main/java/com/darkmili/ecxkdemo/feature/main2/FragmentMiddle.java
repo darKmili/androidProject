@@ -62,7 +62,7 @@ public class FragmentMiddle extends Fragment {
     public void initList() {
         timeList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            timeList.add("2020-01-02");
+            timeList.add("9999-9999-8888-777");
             timeList.add("2020-02-02");
             timeList.add("2020-03-02");
             timeList.add("2020-04-02");

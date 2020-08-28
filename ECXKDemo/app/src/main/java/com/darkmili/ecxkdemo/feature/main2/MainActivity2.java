@@ -14,8 +14,7 @@ import android.view.MenuItem;
 
 import com.darkmili.ecxkdemo.R;
 import com.darkmili.ecxkdemo.feature.BaseActivity;
-import com.darkmili.ecxkdemo.feature.main.MainActivity;
-import com.darkmili.ecxkdemo.repository.local.dao.AnimalDao;
+import com.darkmili.ecxkdemo.feature.bt.MainBTBluetoothActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity2 extends BaseActivity {
@@ -79,7 +78,7 @@ public class MainActivity2 extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_top, menu);
+        getMenuInflater().inflate(R.menu.menu_top2, menu);
         return true;
     }
 
@@ -87,7 +86,7 @@ public class MainActivity2 extends BaseActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MainBTBluetoothActivity.class));
                 finish();
                 break;
 

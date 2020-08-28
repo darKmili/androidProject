@@ -1,12 +1,12 @@
 package com.darkmili.ecxkdemo.feature.main2;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,17 +28,16 @@ import com.darkmili.ecxkdemo.repository.local.bean.Animal;
  */
 public class FragmentLeft extends Fragment {
 
-    private TextView erbiaohao;
+    private EditText erbiaohao;
     private EditText editText1,editText2,editText3;
     private TextView weight,tianshu,jiankang;
     private AppCompatActivity activity;
 
-    private Button button;
+    private ImageButton btnSave,btnLookMore;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_on_main2_left, container, false);
-
         initView(inflate);
         initData(inflate);
         return inflate;
@@ -50,15 +49,18 @@ public class FragmentLeft extends Fragment {
     }
 
     public void initView(View view){
-        button=view.findViewById(R.id.button);
+        btnSave=view.findViewById(R.id.btn_saving);
+        btnLookMore=view.findViewById(R.id.btn_look_more);
+
         activity=(AppCompatActivity)getActivity();
+
         erbiaohao=view.findViewById(R.id.txt_erbiaohao);
         editText1=view.findViewById(R.id.edit1);
         editText2=view.findViewById(R.id.edit2);
         editText3=view.findViewById(R.id.edit3);
         weight=view.findViewById(R.id.text_weight);
 //        jiankang=view.findViewById(R.id.jiankuang);
-        tianshu=view.findViewById(R.id.text_tianshu);
+        tianshu=view.findViewById(R.id.edit_tianshu);
 
     }
      /**
@@ -71,6 +73,7 @@ public class FragmentLeft extends Fragment {
      　　*/
     public void initData(View view){
         final Main2ViewModel viewModel=new  ViewModelProvider.NewInstanceFactory().create(Main2ViewModel.class);
+        //TODO 获取耳标号
         viewModel.getErbiaoId().observe(activity, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -81,34 +84,13 @@ public class FragmentLeft extends Fragment {
         viewModel.getAnimalLiveData().observe(activity, new Observer<Animal>() {
             @Override
             public void onChanged(Animal animal) {
-            update(animal);
             }
         });
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewModel.setErbiaoId("012345672954321");
-            erbiaohao.setText("012345672954321");
-            }
-        });
-//        erbiaohao.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            viewModel.setErbiaoId("012345672954321");
-//            erbiaohao.setText("012345672954321");
-//            }
-//        });
+
     }
 
-    public void update(Animal animal){
-        editText1.setText(animal.getSpecies());
-        editText2.setText(animal.getLanqu());
-        editText3.setText(animal.getBianhao());
-        weight.setText(String.valueOf(animal.getWeight()));
-//        tianshu.setText(animal.getGrowthDays());
-//        jiankang.setText(animal.getHealth());
-    }
+
 
 }

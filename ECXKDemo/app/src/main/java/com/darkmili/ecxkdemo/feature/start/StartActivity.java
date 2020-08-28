@@ -7,7 +7,8 @@ import android.os.Handler;
 
 import com.darkmili.ecxkdemo.R;
 import com.darkmili.ecxkdemo.feature.BaseActivity;
-import com.darkmili.ecxkdemo.feature.main.MainActivity;
+import com.darkmili.ecxkdemo.feature.ble.MainBleBluetoothActivity;
+import com.darkmili.ecxkdemo.feature.bt.MainBTBluetoothActivity;
 
 
 public class StartActivity extends BaseActivity {
@@ -23,7 +24,7 @@ public class StartActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(StartActivity.this, MainActivity.class));
+                startActivity(new Intent(StartActivity.this, MainBTBluetoothActivity.class));
                 StartActivity.this.finish();
             }
         }, time);

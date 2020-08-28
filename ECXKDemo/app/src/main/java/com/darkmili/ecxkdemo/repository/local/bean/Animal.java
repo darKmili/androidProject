@@ -12,74 +12,52 @@ import org.litepal.crud.LitePalSupport;
  */
 public class Animal extends LitePalSupport {
 
-    private String erbiaoId;
+    private String id;//耳标号
 
-    private float weight;
+    private String breeds;//品种
 
-    private int growthDays;
+    private String area;//栏区
 
-    @Column(ignore = true)
-    private String health;
+    private String Pigsty;//猪舍
 
-    private String species;
+    private Record record;//历史记录
 
-    private String lanqu;
-
-    private String bianhao;
-
-    public String getLanqu() {
-        return lanqu;
+    public Animal(String id, String breeds, String area, String pigsty) {
+        this.id = id;
+        this.breeds = breeds;
+        this.area = area;
+        Pigsty = pigsty;
     }
 
-    public void setLanqu(String lanqu) {
-        this.lanqu = lanqu;
+    public String getId() {
+        return id;
     }
 
-    public String getBianhao() {
-        return bianhao;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setBianhao(String bianhao) {
-        this.bianhao = bianhao;
+    public String getBreeds() {
+        return breeds;
     }
 
-    public String getErbiaoId() {
-        return erbiaoId;
+    public void setBreeds(String breeds) {
+        this.breeds = breeds;
     }
 
-    public void setErbiaoId(String erbiaoId) {
-        this.erbiaoId = erbiaoId;
+    public String getArea() {
+        return area;
     }
 
-    public float getWeight() {
-        return weight;
+    public void setArea(String area) {
+        this.area = area;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
+    public String getPigsty() {
+        return Pigsty;
     }
 
-    public int getGrowthDays() {
-        return growthDays;
-    }
-
-    public void setGrowthDays(int growthDays) {
-        this.growthDays = growthDays;
-    }
-
-    public String getHealth() {
-        return health;
-    }
-
-    public void setHealth(String health) {
-        this.health = health;
-    }
-
-    public String getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(String species) {
-        this.species = species;
+    public void setPigsty(String pigsty) {
+        Pigsty = pigsty;
     }
 }

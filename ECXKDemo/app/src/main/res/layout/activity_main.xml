@@ -31,14 +31,24 @@
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
 
-            <TextView
+            <com.google.android.material.tabs.TabLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|start"
                 android:layout_marginLeft="10dp"
-                android:text="发现设备"
-                android:textColor="@android:color/white"
-                android:textSize="24sp" />
+                android:padding="0dp"
+                android:layout_marginBottom="3dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/Theme.AppCompat.Light">
+
+                <com.google.android.material.tabs.TabItem
+                    style="@style/ThemeOverlay.AppCompat.Light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:text="发现设备"
+                    />
+            </com.google.android.material.tabs.TabLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -50,6 +60,7 @@
                 app:popupTheme="@style/Theme.AppCompat.Light">
 
             </androidx.appcompat.widget.Toolbar>
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -82,7 +93,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/progress_circular" />
 
-            <com.darkmili.ecxkdemo.feature.main.NestedListView
+            <com.darkmili.ecxkdemo.feature.bt.NestedListView
                 android:id="@+id/listview_bluetooth_peidui"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +112,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/listview_bluetooth_peidui" />
 
-            <com.darkmili.ecxkdemo.feature.main.NestedListView
+            <com.darkmili.ecxkdemo.feature.bt.NestedListView
                 android:id="@+id/listview_bluetooth_keyong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,8 +132,6 @@
         app:elevation="10dp"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="right|bottom" />
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
