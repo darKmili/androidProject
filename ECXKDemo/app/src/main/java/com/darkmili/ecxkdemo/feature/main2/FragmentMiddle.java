@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +35,9 @@ public class FragmentMiddle extends Fragment {
     private PigdetailsAdapter adapter;
     private RecyclerView recyclerView;
     private Activity activity;
+    private AutoCompleteTextView autoCompleteTextView;
+    private List<String> tips;
+    private ImageButton btn_search;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +57,18 @@ public class FragmentMiddle extends Fragment {
         recyclerView = inflate.findViewById(R.id.recyc_record_middle_fragment);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+
+        autoCompleteTextView = inflate.findViewById(R.id.autoComplete_search);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(activity, R.layout.search_text, tips);
+        autoCompleteTextView.setAdapter(arrayAdapter);
+
+        btn_search=inflate.findViewById(R.id.btn_search_main2);
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(activity,"搜索数据",Toast.LENGTH_LONG).show();
+            }
+        });
         return inflate;
     }
 
@@ -58,16 +77,27 @@ public class FragmentMiddle extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-
+    //TODO 数据获取
     public void initList() {
         timeList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             timeList.add("9999-9999-8888-777");
-            timeList.add("2020-02-02");
-            timeList.add("2020-03-02");
-            timeList.add("2020-04-02");
-            timeList.add("2020-05-02");
-            timeList.add("2020-06-02");
+            timeList.add("8888-9999-8888-777");
+            timeList.add("2222-9999-8888-777");
+            timeList.add("2112-9999-8888-777");
+            timeList.add("4343-9999-8888-777");
+            timeList.add("3543-9999-8888-777");
         }
+
+        tips = new ArrayList<String>();
+        tips.add("4132");
+        tips.add("4212");
+        tips.add("4212");
+        tips.add("4212");
+        tips.add("4212");
+        tips.add("4212");
+        tips.add("4282");
+        tips.add("41323");
+        tips.add("424569");
     }
 }

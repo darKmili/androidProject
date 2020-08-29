@@ -25,7 +25,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/menu_top"
+            app:menu="@menu/menu_top2"
             app:popupTheme="@style/Theme.AppCompat.Light"
             />
     </com.google.android.material.appbar.AppBarLayout>

@@ -39,29 +39,29 @@ public class DialogActivity extends AppCompatActivity {
         List<UserInfo> list = new ArrayList<>();
 
 
-        Column<String> erbiaoId = new Column<>("耳标号", "erbiaoId");
+        Column<String> erbiaoId = new Column<>("时间", "erbiaoId");//
         Column<Float> weight = new Column<>("体重", "weight");
         Column<Integer> growthDays = new Column<Integer>("成长天数", "growthDays");
         Column<String> species = new Column<String>("种类", "species");
         Column<String> lanqu = new Column<String>("栏区", "lanqu");
         Column<String> health = new Column<String>("健康", "health");
-        Column<String> beizhu=new Column<String>("备注","beizhu");
+        Column<String> beizhu = new Column<String>("备注", "beizhu");
 
         //TODO  通过viewModel+litepal动态更新列表数据
 
-        list.add(new UserInfo("012345672954321",80,82,"良","猪","h586","猪猪身体健康,刚打过疫苗"));
-        list.add(new UserInfo("012345672954321",100,100,"良","猪","x89","转移到另一个栏区"));
-        list.add(new UserInfo("012345672954321",152,156,"良","猪","x89","猪猪身体健康,可以宰杀"));list.add(new UserInfo("012345672954321",100,100,"良","猪","x89","转移到另一个栏区"));
-        list.add(new UserInfo("012345672954321",152,156,"良","猪","x89","猪猪身体健康,可以宰杀"));list.add(new UserInfo("012345672954321",100,100,"良","猪","x89","转移到另一个栏区"));
-        list.add(new UserInfo("012345672954321",152,156,"良","猪","x89","猪猪身体健康,可以宰杀"));
-        list.add(new UserInfo("012345672954321", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
-        list.add(new UserInfo("012345672954321", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));list.add(new UserInfo("012345672954321", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
-        list.add(new UserInfo("012345672954321", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
-        list.add(new UserInfo("012345672954321", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
-        list.add(new UserInfo("012345672954321", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
+        list.add(new UserInfo("2020-02-03", 80, 82, "良", "猪", "h586", "猪猪身体健康,刚打过疫苗"));
+        list.add(new UserInfo("2020-07-03", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
+        list.add(new UserInfo("2020-08-03", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
+        list.add(new UserInfo("2020-09-03", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
+        list.add(new UserInfo("2020-10-03", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
+        list.add(new UserInfo("2020-11-03", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
+        list.add(new UserInfo("2020-12-03", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
+        list.add(new UserInfo("2019-11-03", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
+        list.add(new UserInfo("2019-12-03", 100, 100, "良", "猪", "x89", "转移到另一个栏区"));
+        list.add(new UserInfo("2018-02-03", 152, 156, "良", "猪", "x89", "猪猪身体健康,可以宰杀"));
 
 
-        TableData<UserInfo> tableData = new TableData<UserInfo>("时间  " + time, list, erbiaoId, weight,growthDays,species,lanqu,health,beizhu);
+        TableData<UserInfo> tableData = new TableData<UserInfo>("耳标号  " + time, list, erbiaoId, weight, growthDays, species, lanqu, health, beizhu);
 
         table = findViewById(R.id.smart_excel);
         table.setTableData(tableData);
