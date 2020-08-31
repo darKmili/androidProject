@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ *******************************************************************
+  ~ * Copyright (c)  2018
+  ~ * project_name:ECI6005A_AND_APP_V1
+  ~ * 创建时间：18-7-5 下午2:31
+  ~ * 作者：Administrator
+  ~ * 四川翊晟芯科信息技术有限公司
+  ~ * 版权所有 违法必究
+  ~ *******************************************************************
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.ShareActivity"
+    tools:showIn="@layout/activity_share">
+
+</androidx.constraintlayout.widget.ConstraintLayout>

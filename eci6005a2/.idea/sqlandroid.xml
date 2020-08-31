@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SQLAndroidSettings">
+    <option name="databases">
+      <map>
+        <entry key="db_/Users/eci/AndroidStudioProjects/eci6005a/AndroidSqlEditorDatabases/">
+          <value>
+            <list>
+              <option value="JJN6R18302004926" />
+              <option value="beibiaoshujuku.db" />
+              <option value="db" />
+              <option value="db" />
+              <option value="false" />
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="packageNameByDirectory">
+      <map>
+        <entry key="$PROJECT_DIR$/AndroidSqlEditorDatabases/" value="com.eci.eci6005a" />
+      </map>
+    </option>
+  </component>
+</project>

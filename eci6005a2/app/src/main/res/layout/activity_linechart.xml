@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ *******************************************************************
+  ~ * Copyright (c)  2018
+  ~ * project_name:ECI6005A_AND_APP_V1
+  ~ * 创建时间：18-7-13 下午2:15
+  ~ * 作者：Administrator
+  ~ * 四川翊晟芯科信息技术有限公司
+  ~ * 版权所有 违法必究
+  ~ *******************************************************************
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/chart_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:background="#00000000"
+                android:contentDescription="@string/IBdownload"
+                android:src="@drawable/ic_save_24dp" />
+
+            <TextView
+                android:id="@+id/tubiao_erbiaonum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:layout_gravity="center_vertical"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="@color/app_color_theme_5"
+                android:gravity="center_horizontal"
+                android:text="耳标编号：20180101" />
+
+            <ImageButton
+                android:id="@+id/chart_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:background="#00000000"
+                android:contentDescription="@string/IBshare"
+                android:src="@drawable/ic_share_24dp" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="8dp"
+            android:padding="5dp"
+            android:text="周趋势图（单位：分）"
+            android:textFontWeight="1"/>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="8dp"
+            android:padding="5dp"
+            android:text="月趋势图（单位：小时）"
+            android:textFontWeight="1"/>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="8dp"
+            android:padding="5dp"
+            android:text="年趋势图（单位：天）"
+            android:textFontWeight="1"/>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"/>
+
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ *******************************************************************
+  ~ * Copyright (c)  2018
+  ~ * project_name:ECI6005A_AND_APP_V1
+  ~ * 创建时间：18-3-19 下午5:55
+  ~ * 作者：Administrator
+  ~ * 四川翊晟芯科信息技术有限公司
+  ~ * 版权所有 违法必究
+  ~ *******************************************************************
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_gray_9"
+    android:orientation="vertical"
+    tools:context=".activity.GattDetailActivity">
+
+    <include layout="@layout/toolbar_top" />
+
+    <RelativeLayout
+        android:layout_width="360dp"
+        android:layout_height="124dp"
+        android:background="@android:color/white"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:id="@+id/rl_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/padding_2"
+            android:layout_height="120dp"
+            android:background="@android:color/background_light"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/cs_tips"
+                android:layout_width="150dp"
+                android:layout_height="114dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/background_pig"
+                android:contentDescription="@string/csTipsTodo" />
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="30dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/relativeLayout"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/background_dark">
+
+                    <am.widget.multiactiontextview.MultiActionTextView
+                        android:id="@+id/charHighceng1"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="@string/_1"
+                        android:textSize="35dp"
+                        android:textColor="@android:color/holo_red_light" />
+
+                    <am.widget.multiactiontextview.MultiActionTextView
+                        android:id="@+id/charLowceng1"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="@string/_2"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="35dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/black"
+                    android:gravity="center">
+
+                    <am.widget.multiactiontextview.MultiActionTextView
+                        android:id="@+id/charHighceng2"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="@string/_3"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="35dp" />
+
+                    <am.widget.multiactiontextview.MultiActionTextView
+                        android:id="@+id/charLowceng2"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="@string/_4"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="35dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/background_dark"
+                    android:baselineAligned="false">
+
+                    <am.widget.multiactiontextview.MultiActionTextView
+                        android:id="@+id/charHighceng3"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="@string/_5"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="35dp" />
+
+                    <am.widget.multiactiontextview.MultiActionTextView
+                        android:id="@+id/charLowceng3"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="@string/_6"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="35dp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="当前耳标编号:    "
+                android:fontFamily="@font/ubuntumono"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_erbnum"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:maxLength="18"
+                android:text="20180101"
+                android:fontFamily="@font/ubuntumono"
+                android:gravity="center"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@android:color/background_light">-->
+
+        <!--</android.support.v7.widget.RecyclerView>-->
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="346dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

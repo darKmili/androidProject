@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ *******************************************************************
+  ~ * Copyright (c)  2018
+  ~ * project_name:ECI6005A_AND_APP_V1
+  ~ * 创建时间：18-3-19 下午5:55
+  ~ * 作者：Administrator
+  ~ * 四川翊晟芯科信息技术有限公司
+  ~ * 版权所有 违法必究
+  ~ *******************************************************************
+  -->
+
+<set xmlns:android="http://schemas.android.com/apk/res/android" >
+    <translate
+        android:duration="@android:integer/config_longAnimTime"
+        android:fromYDelta="0"
+        android:toYDelta="100%p" />
+</set>

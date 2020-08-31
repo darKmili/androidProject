@@ -1,0 +1,68 @@
+<!--
+  ~ *******************************************************************
+  ~ * Copyright (c)  2018
+  ~ * project_name:ECI6005A_AND_APP_V1
+  ~ * 创建时间：18-3-19 下午5:55
+  ~ * 作者：Administrator
+  ~ * 四川翊晟芯科信息技术有限公司
+  ~ * 版权所有 违法必究
+  ~ *******************************************************************
+  -->
+
+<resources>
+    <!--app名称-->
+    <string name="app_name">背膘测定仪</string>
+    <!--分享-->
+    <string name="menu_usr">官网</string>
+    <string name="share">分享</string>
+    <string name="share_title">选择应用分享</string>
+    <string name="share_ex">未找到应用分享</string>
+
+    <string name="notifyTitle">提示</string>
+    <string name="gpsNotifyMsg">当前手机扫描蓝牙需要打开定位功能。</string>
+    <string name="setting">前往设置</string>
+    <string name="cancel">取消</string>
+
+    <string name="devices">可用设备</string>
+    <string name="stopsearch">结束搜索</string>
+    <string name="csTipsTodo">TODO 测试提示</string>
+    <string name="item_1">item 1</string>
+    <string name="dragDrable">拖动图标</string>
+    <string name="mDataMipMap">数据前图标</string>
+    <string name="share_text">将分享你的数据。。。</string>
+    <string name="connect_fail">连接失败,请检查设备后重新尝试连接!</string>
+    <string name="searching">Searching</string>
+    <string name="search_device_count">已经找到 %1$d 个设备</string>
+    <!--num-->
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <!--其他-->
+    <string name="menu_clear_database">格式化数据库</string>
+
+    <string name="horizontal_timeline">Horizontal Timeline</string>
+    <string name="vertical_timeline">Vertical Timeline</string>
+
+    <string name="erbiao">erbiao</string>
+    <string name="menudbdel">MenuDbDel</string>
+    <string name="title_activity_share">ShareActivity</string>
+    <string name="title_activity_data_detil">DataDetilActivity</string>
+
+    <string name="IBshare">图表分享</string>
+    <string name="IBdownload">图表下载</string>
+    <string name="IBback">图表回退</string>
+
+
+    <!-- 关于界面 -->
+    <string name="about_title">关于</string>
+    <string name="about_item_homepage">访问官网</string>
+    <string name="about_item_github">GitHub</string>
+    <string name="about_copyright">© %1$s QMUI Team All rights reserved.</string>
+
+    <string name="message_setting_comeback">The user comes back from the settings page.</string>
+    <string name="message_permission_always_failed">Please give us permission in the settings:\n\n%1$s</string>
+    <string name="message_permission_rationale">Grant the following permissions to continue the program:\n\n%1$s</string>
+</resources>
