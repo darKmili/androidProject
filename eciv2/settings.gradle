@@ -1,2 +1,3 @@
+include ':firstmodule'
 include ':app'
 rootProject.name = "eciv2"

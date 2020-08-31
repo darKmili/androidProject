@@ -1,5 +1,5 @@
+//在文件的顶部
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
@@ -20,6 +20,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 dependencies {
@@ -27,7 +29,23 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.0'
     testImplementation 'junit:junit:4.12'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //BLE
+    implementation 'com.clj.fastble:FastBleLib:2.3.2'
+    //BLE
+    implementation 'com.polidea.rxandroidble2:rxandroidble:1.9.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+    implementation 'com.jakewharton.rx2:replaying-share:2.1.1'
+
+    //添加material-dialogs依赖
+    //核心模块的依赖
+    implementation 'com.afollestad.material-dialogs:core:0.9.1.0'
+    //公共模块的依赖
+    //公共模块包含不是每个人都需要的扩展库。 这包括 ColorChooserDialog、FolderChooserDialog、Material Preference 类和 MaterialSimpleListAdapter / MaterialSimpleListItem
+    implementation 'com.afollestad.material-dialogs:commons:0.9.1.0'
+
 
 }
